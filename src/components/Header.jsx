@@ -38,7 +38,6 @@ const Header = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <span className="logo-icon">✝</span>
             <span className="logo-text"> Damorn Shunet</span>
           </motion.div>
 
