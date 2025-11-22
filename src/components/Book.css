@@ -28,6 +28,7 @@
 }
 
 .book-content {
+  padding-top: 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
@@ -109,8 +110,8 @@
 }
 
 .book-title {
-  font-size: 2.3rem; /* Slightly reduced for better balance */
-  font-weight: 800;
+  font-size: 1.6rem; /* Slightly reduced for better balance */
+  font-weight: 700;
   color: var(--text-dark);
   margin-bottom: 0.5rem;
   line-height: 1.2;

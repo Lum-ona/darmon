@@ -7,6 +7,7 @@
   padding: 1.5rem 0;
   transition: all 0.4s ease;
   background: transparent;
+  background: rgba(248, 249, 250, 0.95);
 }
 
 .header.scrolled {

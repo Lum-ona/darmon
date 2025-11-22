@@ -57,7 +57,8 @@ const Hero = () => {
               transition={{ delay: 1.2, duration: 1 }}
             >
               <motion.a
-                href="#book"
+                href="https://wa.me/p/31587987360848672/254727129129"
+                target="_blank"
                 className="btn btn-primary"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -65,7 +66,8 @@ const Hero = () => {
                 Get The Book
               </motion.a>
               <motion.a
-                href="#contact"
+                href="mailto:lumona@electrixitaty.com"
+                target="_blank"
                 className="btn btn-secondary"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

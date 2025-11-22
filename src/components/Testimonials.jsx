@@ -40,7 +40,7 @@ const Testimonials = () => {
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          Testimonies
+          What Readers Are Saying
         </motion.h2>
 
         <motion.p
@@ -49,9 +49,7 @@ const Testimonials = () => {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
-        >
-          Lives transformed by the power of God through this ministry
-        </motion.p>
+        ></motion.p>
 
         <div className="testimonials-grid">
           {testimonials.map((testimonial, index) => (

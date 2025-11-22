@@ -4,6 +4,7 @@
 }
 
 .about-content {
+  padding-top: 2rem;
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 4rem;
@@ -18,13 +19,13 @@
   font-size: 1.1rem;
   line-height: 1.8;
   color: var(--text-dark);
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   opacity: 0.9;
 }
 
 .about-highlights {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: auto auto auto;
   gap: 1.5rem;
   margin-top: 2rem;
 }
@@ -167,6 +168,11 @@
 }
 
 @media (max-width: 480px) {
+  .about-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
   .image-stack {
     width: 260px;
     height: 320px;

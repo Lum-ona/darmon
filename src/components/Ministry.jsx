@@ -13,28 +13,28 @@ const Ministry = () => {
       title: "Reign City Chapel",
       description:
         "Founder and Lead Pastor of a thriving Christ-centered ministry committed to equipping believers to walk in power, purpose and dominion. Sunday services at KICC, Aberdare Hall.",
-      link: "#rcc",
+      link: "https://www.instagram.com/reigncitychapel/",
     },
     {
       image: genz,
       title: "Gen Z Loves Jesus",
       description:
         "Vision-bearer and founder of a movement passionate about seeing Generation Z fall in love with Jesus, walk in His light, and impact the world through His love.",
-      link: "#genz",
+      link: "https://www.instagram.com/genz_lovesjesus/",
     },
     {
       image: author,
       title: "Author & Writer",
       description:
         "Author of transformative books including 'What God Says About Your Identity' and 'The Unseen Advantage' that provide biblical insights into spiritual realities.",
-      link: "#books",
+      link: "https://wa.me/p/31587987360848672/254727129129",
     },
     {
       image: music,
       title: "Music Ministry",
       description:
         "Gifted artist and songwriter using music as a vessel to communicate the message of grace, faith, and devotion to Christ through worship-driven sound.",
-      link: "#music",
+      link: "https://www.youtube.com/watch?v=j5dkCvWYiiY&list=RDj5dkCvWYiiY&start_radio=1",
     },
   ];
 

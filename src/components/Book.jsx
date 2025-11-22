@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import "./Book.css";
+import book from "../assets/book/book.jpeg";
 
 const Book = () => {
   const handleOrderClick = () => {
@@ -32,7 +33,7 @@ const Book = () => {
           >
             <div className="book-cover">
               <img
-                src="https://images.unsplash.com/photo-1544947950-fa07a98d237f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=800&q=80"
+                src={book}
                 alt="The Unseen Advantage Book Cover"
                 className="book-image"
               />
@@ -200,41 +201,6 @@ const Book = () => {
             </div>
           </motion.div>
         </div>
-
-        <motion.div
-          className="book-testimonials"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 1.4 }}
-          viewport={{ once: true }}
-        >
-          <h4 className="testimonials-title">What Readers Are Saying</h4>
-          <div className="testimonials-grid">
-            <div className="testimonial-card">
-              <p>
-                "This book opened my eyes to spiritual realities I never knew
-                existed. A game-changer for every believer seeking deeper
-                understanding!"
-              </p>
-              <div className="testimonial-author">- Pastor Michael T.</div>
-            </div>
-            <div className="testimonial-card">
-              <p>
-                "Apostle Shunet's insights into spiritual warfare are
-                revolutionary. This book has equipped me like never before!"
-              </p>
-              <div className="testimonial-author">- Sarah Johnson</div>
-            </div>
-            <div className="testimonial-card">
-              <p>
-                "The depth of revelation in this book is astounding. It's not
-                just theoretical - it provides practical tools for daily
-                spiritual life."
-              </p>
-              <div className="testimonial-author">- Dr. Robert Chen</div>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </section>
   );

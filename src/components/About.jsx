@@ -50,7 +50,7 @@ const About = () => {
               His desire to be a voice of transformation through spreading the
               gospel was ignited while he was still in primary school when a
               divine encounter transformed his relationship with God. With a
-              background in law — holding an LLB (Hons) degree — Apostle Damorn
+              background in law, holding an LLB (Hons) degree, Apostle Damorn
               brings a unique blend of intellect, structure, and spiritual
               passion to his ministry.
             </motion.p>
@@ -63,7 +63,6 @@ const About = () => {
               viewport={{ once: true }}
             >
               <div className="highlight-item">
-                <div className="highlight-icon">🎓</div>
                 <div className="highlight-text">
                   <h4>Legal Background</h4>
                   <p>
@@ -74,7 +73,6 @@ const About = () => {
               </div>
 
               <div className="highlight-item">
-                <div className="highlight-icon">✍️</div>
                 <div className="highlight-text">
                   <h4>Published Author</h4>
                   <p>
@@ -84,7 +82,6 @@ const About = () => {
               </div>
 
               <div className="highlight-item">
-                <div className="highlight-icon">🎵</div>
                 <div className="highlight-text">
                   <h4>Gifted Songwriter</h4>
                   <p>
