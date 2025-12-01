@@ -1,0 +1,360 @@
+:root {
+  /* fallback values if your global vars are missing */
+  --primary-gold: #d4af37;
+  --bg-dark: #0c0d12;
+  --card-bg: #111218;
+  --muted: #9aa0a6;
+  --text-bright: #e9eef6;
+}
+
+/* Container */
+.devotionals-section {
+  background: var(--bg-dark);
+  color: var(--text-bright);
+  padding: 48px 20px;
+  min-height: 100vh;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial;
+}
+
+/* Header + controls */
+.devotionals-header {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: start;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+}
+
+.devotionals-header h2 {
+  margin: 0;
+  font-size: 1.9rem;
+  color: var(--primary-gold);
+  letter-spacing: -0.4px;
+}
+
+.devotionals-header .lead {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+/* Controls */
+.devotional-controls {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  margin-left: auto;
+}
+
+.search-input,
+.author-select,
+.pagesize-select {
+  background: #0a0b0f;
+  color: var(--text-bright);
+  border: 1px solid #1c1e24;
+  padding: 10px 12px;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  min-width: 180px;
+}
+
+.search-input {
+  min-width: 240px;
+}
+
+.author-select,
+.pagesize-select {
+  min-width: 140px;
+}
+
+/* Grid */
+.devotional-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 18px;
+  width: 100%;
+  margin-top: 18px;
+}
+
+/* Card */
+.devotional-card {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.02),
+    rgba(255, 255, 255, 0.01)
+  );
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  padding: 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform 0.22s ease, box-shadow 0.22s ease;
+  box-shadow: 0 6px 18px rgba(2, 6, 23, 0.6);
+}
+
+.devotional-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 36px rgba(2, 6, 23, 0.8);
+}
+
+.card-meta {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  align-items: baseline;
+}
+
+.card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-bright);
+}
+
+.card-date {
+  font-size: 0.82rem;
+  color: var(--muted);
+}
+
+/* excerpt */
+.card-excerpt {
+  color: #cfd6de;
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  max-height: 4.5em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* footer */
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: auto;
+  gap: 10px;
+}
+
+.card-author {
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.card-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.tag {
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--muted);
+  padding: 6px 8px;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  border: 1px solid rgba(255, 255, 255, 0.02);
+}
+
+/* Footer controls */
+.devotional-footer {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 22px;
+  flex-wrap: wrap;
+}
+
+/* pagination elements */
+.pagination {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.page-btn,
+.page-number {
+  background: transparent;
+  color: var(--text-bright);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  padding: 8px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+.page-number.active {
+  background: rgba(212, 175, 55, 0.12);
+  color: var(--primary-gold);
+  border-color: rgba(212, 175, 55, 0.18);
+}
+.page-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+.dots {
+  padding: 0 6px;
+  color: var(--muted);
+}
+
+/* load more */
+.load-more-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+/* jump */
+.jump {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  color: var(--muted);
+}
+.jump input {
+  width: 70px;
+  padding: 6px 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  background: #0a0b0f;
+  color: var(--text-bright);
+}
+
+/* Modal backdrop + dialog */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  padding: 20px;
+}
+
+.devotional-modal {
+  width: 100%;
+  max-width: 920px;
+  max-height: 90vh;
+  overflow: auto;
+  background: linear-gradient(180deg, #0f1116, #0b0c10);
+  border-radius: 12px;
+  padding: 22px;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  position: relative;
+  color: var(--text-bright);
+}
+
+/* modal close */
+.modal-close {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  background: transparent;
+  color: var(--muted);
+  border: none;
+  font-size: 1.05rem;
+  cursor: pointer;
+}
+
+/* header */
+.modal-header h3 {
+  margin: 0;
+  font-size: 1.45rem;
+  color: var(--primary-gold);
+}
+.modal-header .meta {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+.modal-tags {
+  margin-top: 10px;
+  display: flex;
+  gap: 8px;
+}
+
+/* verse block */
+.modal-verse {
+  margin-top: 14px;
+  padding: 14px;
+  background: #09090d;
+  border-left: 4px solid var(--primary-gold);
+  border-radius: 8px;
+  font-family: "Georgia", serif;
+  font-size: 0.95rem;
+  color: #dde8f2;
+}
+
+/* body & confession */
+.modal-body {
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 18px;
+  margin-top: 18px;
+}
+
+.modal-content {
+  font-size: 1rem;
+  color: #e7eef6;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+.modal-confession {
+  background: #0b0c10;
+  border-radius: 10px;
+  padding: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+}
+.modal-confession h4 {
+  margin: 0 0 8px 0;
+  color: var(--primary-gold);
+}
+.modal-confession p {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* Responsive adjustments */
+@media (max-width: 980px) {
+  .modal-body {
+    grid-template-columns: 1fr;
+  }
+  .devotional-controls {
+    width: 100%;
+    justify-content: flex-start;
+    gap: 8px;
+    margin-top: 8px;
+  }
+  .search-input {
+    min-width: 180px;
+  }
+}
+
+@media (max-width: 620px) {
+  .devotional-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .devotional-controls {
+    width: 100%;
+    gap: 8px;
+  }
+  .devotional-grid {
+    gap: 12px;
+  }
+  .card-excerpt {
+    max-height: 3.6em;
+  }
+  .devotional-modal {
+    padding: 16px;
+  }
+  .devotional-section {
+    padding: 28px 16px;
+  }
+}

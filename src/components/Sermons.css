@@ -1,8 +1,8 @@
 .sermons-section {
   background: linear-gradient(
     135deg,
-    var(--lighter-bg) 0%,
-    var(--light-bg) 100%
+    var(--light-bg) 0%,
+    var(--lighter-bg) 100%
   );
 }
 
@@ -14,7 +14,7 @@
 }
 
 .sermon-card {
-  background: rgba(255, 255, 255, 0.8);
+  background: rgba(28, 28, 40, 0.7);
   backdrop-filter: blur(20px);
   border: 1px solid var(--border-light);
   border-radius: 20px;
@@ -24,8 +24,8 @@
 
 .sermon-card:hover {
   transform: translateY(-10px);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-  background: var(--white);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  background: rgba(40, 40, 55, 0.85);
 }
 
 .sermon-image-container {
@@ -51,7 +51,7 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -82,7 +82,7 @@
   position: absolute;
   bottom: 1rem;
   right: 1rem;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.85);
   color: var(--white);
   padding: 0.25rem 0.75rem;
   border-radius: 20px;
@@ -97,7 +97,7 @@
 .sermon-category {
   display: inline-block;
   background: linear-gradient(45deg, var(--primary-gold), #e8c547);
-  color: var(--text-dark);
+  color: var(--deep-purple);
   padding: 0.25rem 0.75rem;
   border-radius: 15px;
   font-size: 0.8rem;

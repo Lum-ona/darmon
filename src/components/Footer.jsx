@@ -1,6 +1,14 @@
 import React from "react";
 import { motion } from "framer-motion";
+import { FaFacebookF, FaInstagram, FaYoutube, FaPodcast } from "react-icons/fa";
 import "./Footer.css";
+
+const socialLinks = [
+  { icon: <FaFacebookF />, url: "https://facebook.com" },
+  { icon: <FaInstagram />, url: "https://instagram.com" },
+  { icon: <FaYoutube />, url: "https://youtube.com" },
+  { icon: <FaPodcast />, url: "https://podcasts.apple.com" },
+];
 
 const Footer = () => {
   return (
@@ -15,121 +23,60 @@ const Footer = () => {
             viewport={{ once: true }}
           >
             <div className="footer-logo">
-              <span className="logo-icon">✝</span>
-              <span className="logo-text">Apostle Darmon Shunet</span>
+              <span className="logo-text">Darmon Shunet</span>
             </div>
             <p className="footer-description">
               Spreading the Gospel with Power, Purpose, and Divine Authority to
               all nations.
             </p>
             <div className="social-links">
-              <motion.a
-                href="#"
-                className="social-link"
-                whileHover={{ scale: 1.2, y: -2 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                📘
-              </motion.a>
-              <motion.a
-                href="#"
-                className="social-link"
-                whileHover={{ scale: 1.2, y: -2 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                📷
-              </motion.a>
-              <motion.a
-                href="#"
-                className="social-link"
-                whileHover={{ scale: 1.2, y: -2 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                🎬
-              </motion.a>
-              <motion.a
-                href="#"
-                className="social-link"
-                whileHover={{ scale: 1.2, y: -2 }}
-                whileTap={{ scale: 0.9 }}
-              >
-                🔊
-              </motion.a>
+              {socialLinks.map((link, i) => (
+                <motion.a
+                  key={i}
+                  href={link.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-link"
+                  whileHover={{ scale: 1.2, y: -2 }}
+                  whileTap={{ scale: 0.9 }}
+                >
+                  {link.icon}
+                </motion.a>
+              ))}
             </div>
           </motion.div>
 
           <div className="footer-links">
-            <motion.div
-              className="footer-column"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.1 }}
-              viewport={{ once: true }}
-            >
-              <h4>Ministry</h4>
-              <ul>
-                <li>
-                  <a href="#">About Us</a>
-                </li>
-                <li>
-                  <a href="#">Our Beliefs</a>
-                </li>
-                <li>
-                  <a href="#">Leadership</a>
-                </li>
-                <li>
-                  <a href="#">Global Missions</a>
-                </li>
-              </ul>
-            </motion.div>
-
-            <motion.div
-              className="footer-column"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              viewport={{ once: true }}
-            >
-              <h4>Resources</h4>
-              <ul>
-                <li>
-                  <a href="#">Sermons</a>
-                </li>
-                <li>
-                  <a href="#">Books</a>
-                </li>
-                <li>
-                  <a href="#">Articles</a>
-                </li>
-                <li>
-                  <a href="#">Prayer Requests</a>
-                </li>
-              </ul>
-            </motion.div>
-
-            <motion.div
-              className="footer-column"
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.3 }}
-              viewport={{ once: true }}
-            >
-              <h4>Connect</h4>
-              <ul>
-                <li>
-                  <a href="#">Events</a>
-                </li>
-                <li>
-                  <a href="#">Volunteer</a>
-                </li>
-                <li>
-                  <a href="#">Give</a>
-                </li>
-                <li>
-                  <a href="#">Contact</a>
-                </li>
-              </ul>
-            </motion.div>
+            <FooterColumn
+              title="Ministry"
+              links={[
+                { label: "About Us", url: "#" },
+                { label: "Our Beliefs", url: "#" },
+                { label: "Leadership", url: "#" },
+                { label: "Global Missions", url: "#" },
+              ]}
+              delay={0.1}
+            />
+            <FooterColumn
+              title="Resources"
+              links={[
+                { label: "Sermons", url: "#" },
+                { label: "Books", url: "#" },
+                { label: "Articles", url: "#" },
+                { label: "Prayer Requests", url: "#" },
+              ]}
+              delay={0.2}
+            />
+            <FooterColumn
+              title="Connect"
+              links={[
+                { label: "Events", url: "#" },
+                { label: "Volunteer", url: "#" },
+                { label: "Give", url: "#" },
+                { label: "Contact", url: "#" },
+              ]}
+              delay={0.3}
+            />
           </div>
         </div>
 
@@ -152,5 +99,24 @@ const Footer = () => {
     </footer>
   );
 };
+
+const FooterColumn = ({ title, links, delay }) => (
+  <motion.div
+    className="footer-column"
+    initial={{ opacity: 0, y: 50 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8, delay }}
+    viewport={{ once: true }}
+  >
+    <h4>{title}</h4>
+    <ul>
+      {links.map((link, i) => (
+        <li key={i}>
+          <a href={link.url}>{link.label}</a>
+        </li>
+      ))}
+    </ul>
+  </motion.div>
+);
 
 export default Footer;

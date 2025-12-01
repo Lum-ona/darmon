@@ -34,7 +34,7 @@ const Ministry = () => {
       title: "Music Ministry",
       description:
         "Gifted artist and songwriter using music as a vessel to communicate the message of grace, faith, and devotion to Christ through worship-driven sound.",
-      link: "https://www.youtube.com/watch?v=j5dkCvWYiiY&list=RDj5dkCvWYiiY&start_radio=1",
+      link: "https://www.youtube.com/watch?v=u17JGgXY194",
     },
   ];
 

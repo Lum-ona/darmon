@@ -12,18 +12,12 @@ const Contact = () => {
   });
 
   const handleChange = (e) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
+    setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Booking request:", formData);
-    alert(
-      "Thank you for your booking request! Apostle Damorn's team will contact you soon."
-    );
+    alert("Your booking request has been submitted!");
     setFormData({
       name: "",
       email: "",
@@ -34,129 +28,120 @@ const Contact = () => {
   };
 
   return (
-    <section id="contact" className="section contact-section">
-      <div className="container">
-        <motion.h2
-          className="section-title"
-          initial={{ opacity: 0, y: 50 }}
+    <section id="contact" className="contact-wrapper">
+      <div className="contact-container">
+        <motion.div
+          initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
         >
-          Book Apostle Damorn
-        </motion.h2>
+          <h2 className="contact-title">Book Apostle Damorn</h2>
+          <p className="contact-subtitle">
+            Invite Apostle Damorn for preaching, interviews, or speaking
+            engagements.
+          </p>
+        </motion.div>
 
-        <motion.p
-          className="section-subtitle"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          Invite Apostle Damorn for preaching, interviews, or speaking
-          engagements
-        </motion.p>
-
-        <div className="contact-content">
+        <div className="contact-grid">
+          {/* LEFT SIDE */}
           <motion.div
-            className="contact-info"
-            initial={{ opacity: 0, x: -50 }}
+            className="contact-left"
+            initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.2 }}
           >
-            <h3 className="contact-subtitle">Speaking Opportunities</h3>
+            <h3 className="left-title">Speaking Opportunities</h3>
 
-            <div className="contact-methods">
-              <div className="contact-method">
-                <div className="method-icon">📖</div>
-                <div className="method-info">
-                  <h4>Preaching & Teaching</h4>
-                  <p>Sunday services, conferences, and church events</p>
-                </div>
-              </div>
-
-              <div className="contact-method">
-                <div className="method-icon">🎤</div>
-                <div className="method-info">
-                  <h4>Interviews & Podcasts</h4>
-                  <p>Media appearances and digital content</p>
-                </div>
-              </div>
-
-              <div className="contact-method">
-                <div className="method-icon">🌟</div>
-                <div className="method-info">
-                  <h4>Youth Events</h4>
-                  <p>Gen Z Loves Jesus conferences and youth gatherings</p>
-                </div>
-              </div>
+            <div className="left-list">
+              {[
+                {
+                  icon: "📖",
+                  title: "Preaching & Teaching",
+                  desc: "Church services & conferences",
+                },
+                {
+                  icon: "🎤",
+                  title: "Interviews & Podcasts",
+                  desc: "Media & content sessions",
+                },
+                {
+                  icon: "🌟",
+                  title: "Youth Events",
+                  desc: "Gen Z gatherings & youth ministry",
+                },
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="left-item"
+                  whileHover={{ x: 5 }}
+                  transition={{ type: "tween", duration: 0.2 }}
+                >
+                  <span className="item-icon">{item.icon}</span>
+                  <div>
+                    <h4>{item.title}</h4>
+                    <p>{item.desc}</p>
+                  </div>
+                </motion.div>
+              ))}
             </div>
 
-            <div className="contact-details">
-              <h4>Contact Details</h4>
-              <div className="detail-item">
+            <div className="left-details">
+              <p>
                 <strong>Email:</strong> apostle@damornshunet.org
-              </div>
-              <div className="detail-item">
+              </p>
+              <p>
                 <strong>Location:</strong> Nairobi, Kenya
-              </div>
-              <div className="detail-item">
+              </p>
+              <p>
                 <strong>Ministry:</strong> Reign City Chapel
-              </div>
+              </p>
             </div>
           </motion.div>
 
+          {/* RIGHT SIDE FORM */}
           <motion.form
             className="contact-form"
             onSubmit={handleSubmit}
-            initial={{ opacity: 0, x: 50 }}
+            initial={{ opacity: 0, x: 40 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
             viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.3 }}
           >
-            <div className="form-group">
-              <label htmlFor="name">Full Name *</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Your full name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="form-input"
-              />
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="email">Email Address *</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="your.email@example.com"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="form-input"
-              />
-            </div>
+            {[
+              { id: "name", type: "text", placeholder: "Your full name" },
+              { id: "email", type: "email", placeholder: "your@email.com" },
+            ].map((input) => (
+              <div className="form-group" key={input.id}>
+                <label htmlFor={input.id}>
+                  {input.id === "name" ? "Full Name *" : "Email *"}
+                </label>
+                <input
+                  type={input.type}
+                  id={input.id}
+                  name={input.id}
+                  placeholder={input.placeholder}
+                  value={formData[input.id]}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            ))}
 
             <div className="form-group">
               <label htmlFor="eventType">Event Type *</label>
               <select
                 id="eventType"
                 name="eventType"
+                required
                 value={formData.eventType}
                 onChange={handleChange}
-                required
-                className="form-input"
               >
                 <option value="">Select event type</option>
-                <option value="preaching">Preaching/Teaching</option>
+                <option value="preaching">Preaching / Teaching</option>
                 <option value="conference">Conference</option>
-                <option value="interview">Interview/Podcast</option>
+                <option value="interview">Interview / Podcast</option>
                 <option value="youth">Youth Event</option>
                 <option value="other">Other</option>
               </select>
@@ -170,7 +155,6 @@ const Contact = () => {
                 name="eventDate"
                 value={formData.eventDate}
                 onChange={handleChange}
-                className="form-input"
               />
             </div>
 
@@ -179,22 +163,21 @@ const Contact = () => {
               <textarea
                 id="message"
                 name="message"
-                placeholder="Please describe your event, expected audience, and any other relevant details..."
-                rows="5"
+                rows="4"
+                required
+                placeholder="Describe your event..."
                 value={formData.message}
                 onChange={handleChange}
-                required
-                className="form-textarea"
               ></textarea>
             </div>
 
             <motion.button
+              className="submit-btn"
               type="submit"
-              className="btn btn-primary submit-btn"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.96 }}
             >
-              Submit Booking Request
+              Submit Request
             </motion.button>
           </motion.form>
         </div>

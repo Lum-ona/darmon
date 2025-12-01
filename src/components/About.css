@@ -1,5 +1,5 @@
 .about-section {
-  background: var(--lighter-bg);
+  background: var(--light-bg); /* Primary dark background */
   position: relative;
 }
 
@@ -18,11 +18,12 @@
 .about-description {
   font-size: 1.1rem;
   line-height: 1.8;
-  color: var(--text-dark);
+  color: var(--text-dark); /* Light text for dark mode */
   margin-bottom: 1rem;
-  opacity: 0.9;
+  opacity: 0.92;
 }
 
+/* SECTION HIGHLIGHTS */
 .about-highlights {
   display: grid;
   grid-template-columns: auto auto auto;
@@ -35,22 +36,17 @@
   align-items: flex-start;
   gap: 1rem;
   padding: 1.5rem;
-  background: var(--white);
-  border-radius: 10px;
+  border-radius: 12px;
+  background: var(--lighter-bg);
   border: 1px solid var(--border-light);
   transition: all 0.3s ease;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 0px 18px rgba(0, 0, 0, 0.45);
 }
 
 .highlight-item:hover {
-  transform: translateX(5px);
+  transform: translateY(-4px);
   border-color: var(--primary-gold);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-}
-
-.highlight-icon {
-  font-size: 1.8rem;
-  flex-shrink: 0;
+  box-shadow: 0 0 30px rgba(212, 175, 55, 0.28);
 }
 
 .highlight-text h4 {
@@ -62,11 +58,12 @@
 
 .highlight-text p {
   color: var(--text-light);
-  opacity: 0.8;
+  opacity: 0.85;
   line-height: 1.6;
   font-size: 0.95rem;
 }
 
+/* IMAGE SECTION */
 .about-images {
   display: flex;
   justify-content: center;
@@ -83,64 +80,66 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 10px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7);
   border: 1px solid var(--border-light);
 }
 
+/* FLOATING CARDS */
 .floating-card {
   position: absolute;
-  background: var(--white);
+  background: var(--lighter-bg);
   border: 1px solid var(--border-light);
   border-radius: 10px;
   padding: 1rem 1.2rem;
   text-align: center;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   max-width: 200px;
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.6);
 }
 
+/* GOLD CARD */
 .card-1 {
   top: -20px;
   right: -20px;
   background: var(--primary-gold);
-  color: var(--text-dark);
-  font-weight: 600;
+  color: #121212;
+  font-weight: 700;
+  box-shadow: 0 0 25px rgba(212, 175, 55, 0.55);
 }
 
+/* PURPLE CARD */
 .card-2 {
   bottom: -20px;
   left: -20px;
   background: var(--deep-purple);
   color: var(--white);
-  font-weight: 600;
+  font-weight: 700;
+  box-shadow: 0 0 25px rgba(34, 20, 85, 0.55);
 }
 
 .floating-card h4 {
   font-size: 1rem;
-  font-weight: 700;
   margin-bottom: 0.25rem;
 }
 
 .floating-card p {
-  font-size: 0.8rem;
-  opacity: 0.9;
+  font-size: 0.85rem;
+  opacity: 0.95;
 }
 
+/* RESPONSIVE */
 @media (max-width: 968px) {
   .about-content {
     grid-template-columns: 1fr;
     gap: 3rem;
     text-align: center;
   }
-
   .about-text {
     max-width: 100%;
   }
-
   .highlight-item {
     text-align: left;
   }
-
   .image-stack {
     width: 320px;
     height: 400px;
@@ -151,19 +150,13 @@
   .about-description {
     font-size: 1rem;
   }
-
   .image-stack {
     width: 280px;
     height: 350px;
   }
-
   .floating-card {
-    padding: 0.8rem 1rem;
     max-width: 160px;
-  }
-
-  .floating-card h4 {
-    font-size: 0.9rem;
+    padding: 0.8rem 1rem;
   }
 }
 
@@ -177,7 +170,6 @@
     width: 260px;
     height: 320px;
   }
-
   .highlight-item {
     flex-direction: column;
     text-align: center;

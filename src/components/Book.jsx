@@ -6,8 +6,7 @@ import book from "../assets/book/book.jpeg";
 const Book = () => {
   const handleOrderClick = () => {
     // In a real application, this would link to a purchase page
-    alert("Redirecting to book purchase page...");
-    // window.location.href = 'https://your-book-purchase-link.com';
+    window.location.href = "https://wa.me/p/31587987360848672/254727129129";
   };
 
   return (
@@ -91,7 +90,6 @@ const Book = () => {
                 transition={{ duration: 0.8, delay: 0.6 }}
                 viewport={{ once: true }}
               >
-                The Unseen Advantage: <br />
                 Understanding Spiritual Realities
               </motion.h3>
 
@@ -164,18 +162,18 @@ const Book = () => {
                   }}
                   whileTap={{ scale: 0.95 }}
                 >
-                  <span className="btn-icon">🛒</span>
+                  {/* <span className="btn-icon">🛒</span> */}
                   Order Your Copy Now
                 </motion.button>
 
-                <motion.button
+                {/* <motion.button
                   className="btn btn-secondary preview-btn"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
                   <span className="btn-icon">👁️</span>
                   Read Preview
-                </motion.button>
+                </motion.button> */}
               </motion.div>
 
               <motion.div

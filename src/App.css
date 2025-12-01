@@ -7,18 +7,28 @@
 
 :root {
   --primary-gold: #d4af37;
-  --deep-purple: #2d1b69;
-  --light-purple: #4a3b8c;
-  --light-bg: #f8f9fa;
-  --lighter-bg: #ffffff;
+
+  /* Core Theme Colors (Dark Mode) */
+  --deep-purple: #1a113d;
+  --light-purple: #3a2d75;
+
+  /* Backgrounds (Dark-friendly) */
+  --light-bg: #121212; /* Main background */
+  --lighter-bg: #1c1c28; /* Card/section background */
+  --light-gray: #2a2a3c; /* Slight contrast for UI blocks */
+
+  /* Text Colors for Dark Mode */
   --white: #ffffff;
-  --light-gray: #f5f5f7;
-  --text-dark: #1a202c;
-  --text-light: #4a5568;
-  --accent-blue: #2d3748;
-  --accent-teal: #2c7a7b;
-  --border-light: #e2e8f0;
-  --success-green: #38a169;
+  --text-dark: #e6e6e6; /* Becomes light text in dark mode */
+  --text-light: #b8b9c5; /* Muted paragraph text */
+
+  /* Accent Colors */
+  --accent-blue: #8faeff; /* Soft glowing blue for highlights */
+  --accent-teal: #4fd1c5; /* Vibrant teal for CTA contrast */
+
+  /* Borders & Status Colors */
+  --border-light: #3d3d4d;
+  --success-green: #52d27a;
 }
 
 html {

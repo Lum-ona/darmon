@@ -56,7 +56,7 @@ const Header = () => {
           </div>
 
           <motion.button
-            className="menu-toggle"
+            className={`menu-toggle ${isMobileMenuOpen ? "open" : ""}`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             whileTap={{ scale: 0.9 }}
           >
