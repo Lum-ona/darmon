@@ -1,390 +1,276 @@
-// you've done an awful job again, the screenshot attatched shows your horrible work.
-// there's a lot of empty space, its too dark, items and paginations arrangment doesn't make sense, the modal doesn't work, the modal doesn't show the full content of devotional. its just the worst thing anyone could ever design. fix it
 import React, { useMemo, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./Devotionals.css";
 
-/**
- * NOTE:
- * - Replace the `devotionals` array with an API call when you have real data.
- * - Each devotional should be an object with: id, title, author, verse, excerpt, content, tags (optional), date.
- */
-
-/* === SAMPLE DATA (start with 2; supports 100+ by replacing this array) === */
-const devotionals = [
-  {
-    id: "favour-with-god",
-    title: "Favour With God",
-    author: "Apostle Damorn Shunet",
-    date: "2024-03-21",
-    verse: `Luke 1:28–30
-“And having come in, the angel said to her, ‘Rejoice, highly favored one...’”`,
-    excerpt:
-      "Favour with God is one of the greatest advantages a person can have. It is when heaven singles you out to show you kindness...",
-    content: `Favour with God is one of the greatest advantages a person can have. It is when heaven singles you out to show you kindness, not because...
-      
-(Full content continues here — paste the rest)`,
-    confession:
-      "Father, Thank You for Your favor upon my life. I declare that I am highly favored, deeply loved, and blessed beyond measure.",
-    tags: ["favor", "grace"],
-  },
-  {
-    id: "but-god-rich-in-mercy",
-    title: "But God Who Is Rich in Mercy",
-    author: "Apostle Damorn Shunet",
-    date: "2024-02-15",
-    verse: `Ephesians 2:1–7
-“And you He made alive... But God, who is rich in mercy...”`,
-    excerpt:
-      "There are two words in Scripture that change everything — 'But God'. Those words break patterns of despair and rewrite our stories...",
-    content: `There are two words in the Bible that change everything — “But God.” Those words break the pattern of despair and rewrite the story of our lives...
-    
-(Full content continues here — paste the rest)`,
-    confession:
-      "Father, Thank You for Your rich mercy that found me when I was lost. I declare my life is a testimony of Your mercy.",
-    tags: ["mercy", "gospel"],
-  },
-];
-
-/* === Helper: format date nicely === */
-function formatDate(iso) {
-  try {
-    const d = new Date(iso);
-    return d.toLocaleDateString(undefined, {
-      year: "numeric",
-      month: "short",
-      day: "numeric",
-    });
-  } catch {
-    return iso;
-  }
-}
-
-/* === Component === */
 export default function Devotionals() {
-  // UI state
+  const devotionals = [
+    {
+      id: "favour-with-god",
+      title: "Favour With God",
+      author: "Apostle Damorn Shunet",
+      date: "2024-03-21",
+      verse: `Luke 1:28–30
+“And having come in, the angel said to her, ‘Rejoice, highly favored one, the Lord is with you; blessed are you among women!’ But when she saw him, she was troubled at his saying, and considered what manner of greeting this was. Then the angel said to her, ‘Do not be afraid, Mary, for you have found favor with God.’”
+`,
+      excerpt:
+        "Favour with God is one of the greatest advantages a person can have. It is when heaven singles you out to show you kindness...",
+      content: `Favour with God opens doors that effort cannot. It brings opportunities that hard work alone cannot earn. It makes you visible in places where you would otherwise be overlooked. The Bible says in Genesis 39 that Joseph “found favor” even in prison, and that favor positioned him to become a ruler in Egypt. When God’s favor rests on you, your environment does not determine your outcome.
+
+Sometimes however, favor can produce conflict. Mary had to face questions, gossip, and the uncertainty of carrying something no one understood. But God’s favor always comes with an assurance of His presence. The angel said, “The Lord is with you.” That means when God favors you, He walks with you through the process, ensuring His purpose is fulfilled.
+
+Favour is not random there are principles that attract it like growth, humility, and trust. It comes to those whose hearts are yielded to God. You don’t need to strive for it you need only to stay in alignment with His will. As you walk faithfully with Him, His favor will make room for you, speak for you, and sustain you where human strength cannot.
+`,
+      confession:
+        "Father, Thank You for Your favor upon my life. I declare that I am highly favored, deeply loved, and blessed beyond measure.",
+      tags: ["favor", "grace"],
+    },
+    {
+      id: "but-god-rich-in-mercy",
+      title: "But God Who Is Rich in Mercy",
+      author: "Apostle Damorn Shunet",
+      date: "2024-02-15",
+      verse: `Ephesians 2:1–7
+“And you He made alive, who were dead in trespasses and sins, in which you once walked according to the course of this world, according to the prince of the power of the air, the spirit who now works in the sons of disobedience, among whom also we all once conducted ourselves in the lusts of our flesh, fulfilling the desires of the flesh and of the mind, and were by nature children of wrath, just as the others. But God, who is rich in mercy, because of His great love with which He loved us, even when we were dead in trespasses, made us alive together with Christ, (by grace you have been saved), and raised us up together, and made us sit together in the heavenly places in Christ Jesus, that in the ages to come He might show the exceeding riches of His grace in His kindness toward us in Christ Jesus.” - Ephesians 2:1–7
+`,
+      excerpt:
+        "There are two words in Scripture that change everything — 'But God'. Those words break patterns of despair and rewrite our stories...",
+      content: `There are two words in the Bible that change everything, But God. Those words break the pattern of despair and rewrite the story of our lives. Paul paints a dark picture of humanity here, dead in sin, slaves to the flesh, ruled by the enemy, and deserving of death. Then suddenly, mercy enters the story. But God, who is rich in mercy.
+
+Think about that. God didn’t wait for us to get better, cleaner, or more obedient. While we were still in our mess, He loved us. He reached down when we were unreachable and made us alive again through Christ. This is the heartbeat of the gospel, the mercy of the Lord that finds us in death and breathes life again.
+
+Every believer has a But God story. Times when you should have been gone, broken, or lost, but God intervened. His mercy rewrote your ending.
+
+The truth is, mercy is not just something God gives it’s who He is. His mercy is richer than our mistakes and stronger than our failures.
+
+Today, rest in that reality. You are living proof of His mercy. No matter what guilt or shame tries to speak, let the words But God silence them all.
+`,
+      confession:
+        "Father, Thank You for Your rich mercy that found me when I was lost. I declare my life is a testimony of Your mercy.",
+      tags: ["mercy", "gospel"],
+    },
+  ];
+
+  /* -----------------------------  STATE  ----------------------------- */
+
   const [query, setQuery] = useState("");
   const [authorFilter, setAuthorFilter] = useState("All");
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(6); // default cards per page
-  const [selected, setSelected] = useState(null); // devotional object for modal
+  const [pageSize, setPageSize] = useState(6);
+  const [selected, setSelected] = useState(null);
   const [loadMoreMode, setLoadMoreMode] = useState(false);
 
-  // If you have >100 items, replace devotionals const with fetch and set to state.
-  // Authors list for filter
-  const authors = useMemo(() => {
-    const setA = new Set(devotionals.map((d) => d.author));
-    return ["All", ...Array.from(setA)];
-  }, []);
+  /* ----------------------------- FILTERING ----------------------------- */
 
-  // Filter + search
+  const authors = ["All", ...new Set(devotionals.map((d) => d.author))];
+
   const filtered = useMemo(() => {
-    const q = query.trim().toLowerCase();
+    const q = query.toLowerCase();
     return devotionals.filter((d) => {
-      const matchesAuthor = authorFilter === "All" || d.author === authorFilter;
-      const matchesQuery =
+      const matchAuthor = authorFilter === "All" || d.author === authorFilter;
+      const matchQuery =
         q === "" ||
         d.title.toLowerCase().includes(q) ||
         d.excerpt.toLowerCase().includes(q) ||
         (d.tags && d.tags.join(" ").toLowerCase().includes(q));
-      return matchesAuthor && matchesQuery;
+
+      return matchAuthor && matchQuery;
     });
   }, [query, authorFilter]);
 
-  // Pagination calculations
+  /* ----------------------------- PAGINATION ----------------------------- */
+
   const total = filtered.length;
   const totalPages = Math.max(1, Math.ceil(total / pageSize));
-  useEffect(() => {
-    if (page > totalPages) setPage(totalPages);
-  }, [totalPages, page]);
 
-  // Items to show
   const itemsToShow = useMemo(() => {
-    if (loadMoreMode) {
-      // show everything up-to a limit (e.g. page * pageSize) or all
-      return filtered.slice(0, page * pageSize);
-    }
+    if (loadMoreMode) return filtered.slice(0, page * pageSize);
     const start = (page - 1) * pageSize;
     return filtered.slice(start, start + pageSize);
   }, [filtered, page, pageSize, loadMoreMode]);
 
-  // Modal close on ESC
-  useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === "Escape") setSelected(null);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  /* ----------------------------- FORMAT DATE ----------------------------- */
 
-  // Accessibility: prevent body scroll while modal open
-  useEffect(() => {
-    if (selected) {
-      document.body.style.overflow = "hidden";
-    } else document.body.style.overflow = "";
-  }, [selected]);
-
-  // small UI helpers
-  const goToPage = (n) => {
-    setPage(n);
-    window.scrollTo({ top: 300, behavior: "smooth" });
+  const formatDate = (iso) => {
+    const d = new Date(iso);
+    return d.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
   };
 
+  /* ----------------------------- MODAL SCROLL LOCK ----------------------------- */
+
+  useEffect(() => {
+    document.body.style.overflow = selected ? "hidden" : "auto";
+  }, [selected]);
+
   return (
-    <section id="devotionals" className="devotionals-section">
-      <div className="devotionals-header">
-        <div>
-          <h2>Devotionals</h2>
-          <p className="lead">
-            Short, powerful devotionals to strengthen your walk. Browse, search,
-            and read.
-          </p>
-        </div>
+    <section className="devotionals-page">
+      {/* HEADER */}
+      <div>
+        <motion.h2
+          className="section-title"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          viewport={{ once: true }}
+        >
+          Devotionals
+        </motion.h2>
+        <motion.p
+          className="section-subtitle"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          Short, powerful devotionals to strengthen your walk.{" "}
+        </motion.p>
+      </div>
+      <div className="dev-header">
+        <div className="dev-controls">
+          <div>
+            <input
+              type="search"
+              placeholder="Search devotionals..."
+              value={query}
+              onChange={(e) => {
+                setQuery(e.target.value);
+                setPage(1);
+              }}
+            />
+          </div>
 
-        <div className="devotional-controls">
-          <input
-            type="search"
-            placeholder="Search title, excerpt or tags..."
-            value={query}
-            onChange={(e) => {
-              setQuery(e.target.value);
-              setPage(1);
-            }}
-            className="search-input"
-            aria-label="Search devotionals"
-          />
+          <div className="dev-filters">
+            <select
+              value={authorFilter}
+              onChange={(e) => {
+                setAuthorFilter(e.target.value);
+                setPage(1);
+              }}
+            >
+              {authors.map((a) => (
+                <option key={a}>{a}</option>
+              ))}
+            </select>
 
-          <select
-            className="author-select"
-            value={authorFilter}
-            onChange={(e) => {
-              setAuthorFilter(e.target.value);
-              setPage(1);
-            }}
-            aria-label="Filter by author"
-          >
-            {authors.map((a) => (
-              <option key={a} value={a}>
-                {a}
-              </option>
-            ))}
-          </select>
-
-          <select
-            className="pagesize-select"
-            value={pageSize}
-            onChange={(e) => {
-              setPageSize(Number(e.target.value));
-              setPage(1);
-            }}
-            aria-label="Items per page"
-          >
-            {[6, 8, 12, 20].map((n) => (
-              <option key={n} value={n}>
-                {n} / page
-              </option>
-            ))}
-          </select>
+            <select
+              value={pageSize}
+              onChange={(e) => {
+                setPageSize(Number(e.target.value));
+                setPage(1);
+              }}
+            >
+              {[6, 8, 12, 20].map((n) => (
+                <option key={n}>{n}</option>
+              ))}
+            </select>
+          </div>
         </div>
       </div>
 
-      <div className="devotional-grid" role="list">
+      {/* GRID */}
+      <div className="dev-grid">
         {itemsToShow.map((d) => (
-          <motion.article
+          <motion.div
             key={d.id}
-            className="devotional-card"
-            layout
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileHover={{ y: -6 }}
+            className="dev-card"
+            whileHover={{ y: -5 }}
             onClick={() => setSelected(d)}
-            role="listitem"
-            tabIndex={0}
-            onKeyDown={(e) => e.key === "Enter" && setSelected(d)}
           >
-            <div className="card-meta">
-              <div className="card-title">{d.title}</div>
-              <div className="card-date">{formatDate(d.date)}</div>
+            <div className="dev-card-top">
+              <h3>{d.title}</h3>
+              <span className="dev-date">{formatDate(d.date)}</span>
             </div>
 
-            <div className="card-body">
-              <p className="card-excerpt">{d.excerpt}</p>
-            </div>
+            <p className="dev-excerpt">{d.excerpt}</p>
 
-            <div className="card-footer">
-              <span className="card-author">{d.author}</span>
-              <div className="card-tags">
-                {(d.tags || []).slice(0, 3).map((t) => (
-                  <span key={t} className="tag">
-                    {t}
-                  </span>
+            <div className="dev-card-bottom">
+              <span className="dev-author">{d.author}</span>
+
+              <div className="dev-tags">
+                {(d.tags || []).map((t) => (
+                  <span key={t}>{t}</span>
                 ))}
               </div>
             </div>
-          </motion.article>
+          </motion.div>
         ))}
       </div>
 
-      {/* pagination / controls */}
-      <div className="devotional-footer">
-        <div className="pagination-left">
-          <div className="count">
-            Showing {Math.min(itemsToShow.length, total)} of {total} results
-          </div>
+      {/* FOOTER + PAGINATION */}
+      <div className="dev-footer">
+        <div className="dev-count">
+          Showing {itemsToShow.length} of {total}
         </div>
 
-        <div className="pagination-center" aria-hidden={false}>
-          {!loadMoreMode && (
-            <div className="pagination">
-              <button
-                className="page-btn"
-                onClick={() => goToPage(Math.max(1, page - 1))}
-                disabled={page <= 1}
-              >
-                Prev
-              </button>
+        {!loadMoreMode && (
+          <div className="dev-pagination">
+            <button disabled={page <= 1} onClick={() => setPage(page - 1)}>
+              Prev
+            </button>
 
-              {/* show limited range of page buttons for many pages */}
-              {Array.from({ length: totalPages }).map((_, i) => {
-                const p = i + 1;
-                // show first, last, current +/-1, and ellipsis
-                if (
-                  p === 1 ||
-                  p === totalPages ||
-                  (p >= page - 1 && p <= page + 1) ||
-                  (page <= 2 && p <= 4) ||
-                  (page >= totalPages - 1 && p >= totalPages - 3)
-                ) {
-                  return (
-                    <button
-                      key={p}
-                      className={`page-number ${p === page ? "active" : ""}`}
-                      onClick={() => goToPage(p)}
-                    >
-                      {p}
-                    </button>
-                  );
-                } else if (
-                  (p === page - 2 && p > 1) ||
-                  (p === page + 2 && p < totalPages)
-                ) {
-                  return (
-                    <span key={"dot-" + p} className="dots">
-                      …
-                    </span>
-                  );
-                }
-                return null;
-              })}
+            {[...Array(totalPages)].map((_, i) => {
+              const p = i + 1;
+              return (
+                <button
+                  key={p}
+                  onClick={() => setPage(p)}
+                  className={p === page ? "active" : ""}
+                >
+                  {p}
+                </button>
+              );
+            })}
 
-              <button
-                className="page-btn"
-                onClick={() => goToPage(Math.min(totalPages, page + 1))}
-                disabled={page >= totalPages}
-              >
-                Next
-              </button>
-            </div>
-          )}
-
-          {/* Load more toggle */}
-          <div className="load-more">
-            <label className="load-more-label">
-              <input
-                type="checkbox"
-                checked={loadMoreMode}
-                onChange={(e) => setLoadMoreMode(e.target.checked)}
-              />
-              Load more (infinite style)
-            </label>
+            <button
+              disabled={page >= totalPages}
+              onClick={() => setPage(page + 1)}
+            >
+              Next
+            </button>
           </div>
-        </div>
-
-        <div className="pagination-right">
-          <div className="jump">
-            <label>Jump to page</label>
-            <input
-              type="number"
-              min="1"
-              max={totalPages}
-              value={page}
-              onChange={(e) =>
-                goToPage(
-                  Math.max(1, Math.min(totalPages, Number(e.target.value || 1)))
-                )
-              }
-            />
-          </div>
-        </div>
+        )}
       </div>
 
-      {/* Modal */}
+      {/* MODAL */}
       <AnimatePresence>
         {selected && (
           <motion.div
-            className="modal-backdrop"
+            className="dev-modal-backdrop"
+            onClick={() => setSelected(null)}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={() => setSelected(null)}
           >
-            <motion.dialog
-              className="devotional-modal"
-              role="dialog"
-              aria-modal="true"
-              aria-label={selected.title}
+            <motion.div
+              className="dev-modal"
               onClick={(e) => e.stopPropagation()}
-              initial={{ opacity: 0, y: 30, scale: 0.98 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: 20, scale: 0.98 }}
-              transition={{ duration: 0.25 }}
+              initial={{ y: 40, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: 40, opacity: 0 }}
             >
-              <button
-                className="modal-close"
-                onClick={() => setSelected(null)}
-                aria-label="Close"
-              >
+              <button className="modal-close" onClick={() => setSelected(null)}>
                 ✕
               </button>
 
-              <header className="modal-header">
-                <h3>{selected.title}</h3>
-                <div className="meta">
-                  <span>{selected.author}</span> •{" "}
-                  <span>{formatDate(selected.date)}</span>
+              <h2 className="modal-title">{selected.title}</h2>
+              <p className="modal-meta">
+                {selected.author} • {formatDate(selected.date)}
+              </p>
+
+              <pre className="modal-verse">{selected.verse}</pre>
+
+              <div className="modal-content">{selected.content}</div>
+
+              {selected.confession && (
+                <div className="modal-confession">
+                  <h4>Confession</h4>
+                  <p>{selected.confession}</p>
                 </div>
-                {selected.tags && (
-                  <div className="modal-tags">
-                    {selected.tags.map((t) => (
-                      <span key={t} className="tag small">
-                        {t}
-                      </span>
-                    ))}
-                  </div>
-                )}
-              </header>
-
-              <section className="modal-verse">
-                <pre>{selected.verse}</pre>
-              </section>
-
-              <section className="modal-body">
-                <div className="modal-content">
-                  <p style={{ whiteSpace: "pre-wrap", lineHeight: 1.7 }}>
-                    {selected.content}
-                  </p>
-                </div>
-
-                {selected.confession && (
-                  <aside className="modal-confession">
-                    <h4>Confession</h4>
-                    <p style={{ whiteSpace: "pre-wrap" }}>
-                      {selected.confession}
-                    </p>
-                  </aside>
-                )}
-              </section>
-            </motion.dialog>
+              )}
+            </motion.div>
           </motion.div>
         )}
       </AnimatePresence>

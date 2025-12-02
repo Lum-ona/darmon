@@ -9,7 +9,7 @@ import Testimonials from "./components/Testimonials";
 import Sermons from "./components/Sermons";
 import Contact from "./components/Contact";
 import Footer from "./components/Footer";
-// import Devotionals from "./components/Devotionals";
+import Devotionals from "./components/Devotionals";
 
 function App() {
   return (
@@ -19,8 +19,8 @@ function App() {
       <About />
       <Ministry />
       <Book />
-      {/* <Devotionals /> */}
       <Testimonials />
+      <Devotionals />
       <Sermons />
       <Contact />
       <Footer />
