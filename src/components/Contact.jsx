@@ -1,6 +1,16 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import {
+  FiMail,
+  FiPhone,
+  FiMapPin,
+  FiMic,
+  FiCalendar,
+  FiUser,
+  FiSend,
+} from "react-icons/fi";
 import "./Contact.css";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -11,173 +21,186 @@ const Contact = () => {
     message: "",
   });
 
-  const handleChange = (e) => {
+  const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Your booking request has been submitted!");
-    setFormData({
-      name: "",
-      email: "",
-      eventType: "",
-      eventDate: "",
-      message: "",
-    });
+
+    try {
+      await emailjs.send(
+        "YOUR_SERVICE_ID",
+        "YOUR_TEMPLATE_ID",
+        {
+          name: formData.name,
+          email: formData.email,
+          eventType: formData.eventType,
+          eventDate: formData.eventDate || "Not specified",
+          message: formData.message,
+        },
+        "YOUR_PUBLIC_KEY",
+      );
+
+      alert("Booking request sent successfully!");
+
+      setFormData({
+        name: "",
+        email: "",
+        eventType: "",
+        eventDate: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error(error);
+      alert("Failed to send booking request. Please try again.");
+    }
   };
 
   return (
-    <section id="contact" className="contact-wrapper">
-      <div className="contact-container">
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
+    <section id="contact" className="contact-section">
+      <div className="contact-shell">
+        {/* HEADER */}
+        <motion.header
+          className="contact-header"
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
         >
-          <h2 className="contact-title">Book Apostle Damorn</h2>
-          <p className="contact-subtitle">
-            Invite Apostle Damorn for preaching, interviews, or speaking
-            engagements.
+          <h2>Booking & Invitations</h2>
+          <p>
+            Request Apostle Damorn for preaching, conferences, media, or special
+            ministry engagements.
           </p>
-        </motion.div>
+        </motion.header>
 
-        <div className="contact-grid">
-          {/* LEFT SIDE */}
-          <motion.div
-            className="contact-left"
-            initial={{ opacity: 0, x: -40 }}
+        <div className="contact-layout">
+          {/* INFO PANEL */}
+          <motion.aside
+            className="contact-info"
+            initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.2 }}
           >
-            <h3 className="left-title">Speaking Opportunities</h3>
+            <h3>Engagement Types</h3>
 
-            <div className="left-list">
-              {[
-                {
-                  icon: "📖",
-                  title: "Preaching & Teaching",
-                  desc: "Church services & conferences",
-                },
-                {
-                  icon: "🎤",
-                  title: "Interviews & Podcasts",
-                  desc: "Media & content sessions",
-                },
-                {
-                  icon: "🌟",
-                  title: "Youth Events",
-                  desc: "Gen Z gatherings & youth ministry",
-                },
-              ].map((item, index) => (
-                <motion.div
-                  key={index}
-                  className="left-item"
-                  whileHover={{ x: 5 }}
-                  transition={{ type: "tween", duration: 0.2 }}
-                >
-                  <span className="item-icon">{item.icon}</span>
-                  <div>
-                    <h4>{item.title}</h4>
-                    <p>{item.desc}</p>
-                  </div>
-                </motion.div>
-              ))}
+            <div className="info-cards">
+              <div className="info-card">
+                <FiMic />
+                <div>
+                  <h4>Preaching & Teaching</h4>
+                  <span>Churches & conferences</span>
+                </div>
+              </div>
+
+              <div className="info-card">
+                <FiSend />
+                <div>
+                  <h4>Interviews & Media</h4>
+                  <span>Podcasts & broadcasts</span>
+                </div>
+              </div>
+
+              <div className="info-card">
+                <FiCalendar />
+                <div>
+                  <h4>Youth & Special Events</h4>
+                  <span>Gen Z & revival gatherings</span>
+                </div>
+              </div>
             </div>
 
-            <div className="left-details">
-              <p>
-                <strong>Email:</strong> apostle@damornshunet.org
-              </p>
-              <p>
-                <strong>Location:</strong> Nairobi, Kenya
-              </p>
-              <p>
-                <strong>Ministry:</strong> Reign City Chapel
-              </p>
+            <div className="contact-meta">
+              <div>
+                <FiPhone />
+                <span>+254 727 129 129</span>
+              </div>
+              <div>
+                <FiMail />
+                <span>genzlovesjesus@gmail.com</span>
+              </div>
+              <div>
+                <FiMapPin />
+                <span>Nairobi, Kenya</span>
+              </div>
             </div>
-          </motion.div>
+          </motion.aside>
 
-          {/* RIGHT SIDE FORM */}
+          {/* FORM */}
           <motion.form
             className="contact-form"
             onSubmit={handleSubmit}
-            initial={{ opacity: 0, x: 40 }}
+            initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.7, delay: 0.3 }}
           >
-            {[
-              { id: "name", type: "text", placeholder: "Your full name" },
-              { id: "email", type: "email", placeholder: "your@email.com" },
-            ].map((input) => (
-              <div className="form-group" key={input.id}>
-                <label htmlFor={input.id}>
-                  {input.id === "name" ? "Full Name *" : "Email *"}
-                </label>
-                <input
-                  type={input.type}
-                  id={input.id}
-                  name={input.id}
-                  placeholder={input.placeholder}
-                  value={formData[input.id]}
-                  onChange={handleChange}
-                  required
-                />
-              </div>
-            ))}
-
-            <div className="form-group">
-              <label htmlFor="eventType">Event Type *</label>
-              <select
-                id="eventType"
-                name="eventType"
+            <div className="field">
+              <FiUser />
+              <input
+                type="text"
+                name="name"
+                placeholder="Full name"
+                value={formData.name}
+                onChange={handleChange}
                 required
+              />
+            </div>
+
+            <div className="field">
+              <FiMail />
+              <input
+                type="email"
+                name="email"
+                placeholder="Email address"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+
+            <div className="field">
+              <FiMic />
+              <select
+                name="eventType"
                 value={formData.eventType}
                 onChange={handleChange}
+                required
               >
                 <option value="">Select event type</option>
                 <option value="preaching">Preaching / Teaching</option>
                 <option value="conference">Conference</option>
-                <option value="interview">Interview / Podcast</option>
+                <option value="media">Interview / Podcast</option>
                 <option value="youth">Youth Event</option>
                 <option value="other">Other</option>
               </select>
             </div>
 
-            <div className="form-group">
-              <label htmlFor="eventDate">Proposed Event Date</label>
+            <div className="field">
+              <FiCalendar />
               <input
                 type="date"
-                id="eventDate"
                 name="eventDate"
                 value={formData.eventDate}
                 onChange={handleChange}
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="message">Event Details *</label>
+            <div className="field textarea">
               <textarea
-                id="message"
                 name="message"
-                rows="4"
-                required
-                placeholder="Describe your event..."
+                placeholder="Describe the event, location, audience, and expectations"
                 value={formData.message}
                 onChange={handleChange}
-              ></textarea>
+                required
+              />
             </div>
 
             <motion.button
-              className="submit-btn"
               type="submit"
-              whileHover={{ scale: 1.03 }}
+              className="form-submit"
+              whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.96 }}
             >
-              Submit Request
+              Submit Booking Request
             </motion.button>
           </motion.form>
         </div>

@@ -1,68 +1,87 @@
-import React, { useMemo, useState, useEffect } from "react";
+import React, { useMemo, useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "./Devotionals.css";
+import debounce from "lodash/debounce"; // Assume lodash is installed; if not, implement debounce manually
+import { sanityClient } from "../sanityClient";
 
 export default function Devotionals() {
-  const devotionals = [
-    {
-      id: "favour-with-god",
-      title: "Favour With God",
-      author: "Apostle Damorn Shunet",
-      date: "2024-03-21",
-      verse: `Luke 1:28–30
-“And having come in, the angel said to her, ‘Rejoice, highly favored one, the Lord is with you; blessed are you among women!’ But when she saw him, she was troubled at his saying, and considered what manner of greeting this was. Then the angel said to her, ‘Do not be afraid, Mary, for you have found favor with God.’”
-`,
-      excerpt:
-        "Favour with God is one of the greatest advantages a person can have. It is when heaven singles you out to show you kindness...",
-      content: `Favour with God opens doors that effort cannot. It brings opportunities that hard work alone cannot earn. It makes you visible in places where you would otherwise be overlooked. The Bible says in Genesis 39 that Joseph “found favor” even in prison, and that favor positioned him to become a ruler in Egypt. When God’s favor rests on you, your environment does not determine your outcome.
+  const [devotionals, setDevotionals] = useState([]);
 
-Sometimes however, favor can produce conflict. Mary had to face questions, gossip, and the uncertainty of carrying something no one understood. But God’s favor always comes with an assurance of His presence. The angel said, “The Lord is with you.” That means when God favors you, He walks with you through the process, ensuring His purpose is fulfilled.
+  useEffect(() => {
+    sanityClient
+      .fetch(
+        `*[_type == "devotional"] | order(date desc) {
+        _id,
+        title,
+        author,
+        date,
+        verse,
+        excerpt,
+        content,
+        confession,
+        tags
+      }`,
+      )
+      .then(setDevotionals)
+      .catch(console.error);
+  }, []);
 
-Favour is not random there are principles that attract it like growth, humility, and trust. It comes to those whose hearts are yielded to God. You don’t need to strive for it you need only to stay in alignment with His will. As you walk faithfully with Him, His favor will make room for you, speak for you, and sustain you where human strength cannot.
-`,
-      confession:
-        "Father, Thank You for Your favor upon my life. I declare that I am highly favored, deeply loved, and blessed beyond measure.",
-      tags: ["favor", "grace"],
-    },
-    {
-      id: "but-god-rich-in-mercy",
-      title: "But God Who Is Rich in Mercy",
-      author: "Apostle Damorn Shunet",
-      date: "2024-02-15",
-      verse: `Ephesians 2:1–7
-“And you He made alive, who were dead in trespasses and sins, in which you once walked according to the course of this world, according to the prince of the power of the air, the spirit who now works in the sons of disobedience, among whom also we all once conducted ourselves in the lusts of our flesh, fulfilling the desires of the flesh and of the mind, and were by nature children of wrath, just as the others. But God, who is rich in mercy, because of His great love with which He loved us, even when we were dead in trespasses, made us alive together with Christ, (by grace you have been saved), and raised us up together, and made us sit together in the heavenly places in Christ Jesus, that in the ages to come He might show the exceeding riches of His grace in His kindness toward us in Christ Jesus.” - Ephesians 2:1–7
-`,
-      excerpt:
-        "There are two words in Scripture that change everything — 'But God'. Those words break patterns of despair and rewrite our stories...",
-      content: `There are two words in the Bible that change everything, But God. Those words break the pattern of despair and rewrite the story of our lives. Paul paints a dark picture of humanity here, dead in sin, slaves to the flesh, ruled by the enemy, and deserving of death. Then suddenly, mercy enters the story. But God, who is rich in mercy.
+  //   const devotionals = [
+  //     {
+  //       id: "favour-with-god",
+  //       title: "Favour With God",
+  //       author: "Apostle Damorn Shunet",
+  //       date: "2024-03-21",
+  //       verse: `Luke 1:28–30
+  // “And having come in, the angel said to her, ‘Rejoice, highly favored one, the Lord is with you; blessed are you among women!’ But when she saw him, she was troubled at his saying, and considered what manner of greeting this was. Then the angel said to her, ‘Do not be afraid, Mary, for you have found favor with God.’”`,
+  //       excerpt:
+  //         "Favour with God is one of the greatest advantages a person can have. It is when heaven singles you out to show you kindness...",
+  //       content: `Favour with God opens doors that effort cannot. It brings opportunities that hard work alone cannot earn. It makes you visible in places where you would otherwise be overlooked. The Bible says in Genesis 39 that Joseph “found favor” even in prison, and that favor positioned him to become a ruler in Egypt. When God’s favor rests on you, your environment does not determine your outcome.
 
-Think about that. God didn’t wait for us to get better, cleaner, or more obedient. While we were still in our mess, He loved us. He reached down when we were unreachable and made us alive again through Christ. This is the heartbeat of the gospel, the mercy of the Lord that finds us in death and breathes life again.
+  // Sometimes however, favor can produce conflict. Mary had to face questions, gossip, and the uncertainty of carrying something no one understood. But God’s favor always comes with an assurance of His presence. The angel said, “The Lord is with you.” That means when God favors you, He walks with you through the process, ensuring His purpose is fulfilled.
 
-Every believer has a But God story. Times when you should have been gone, broken, or lost, but God intervened. His mercy rewrote your ending.
+  // Favour is not random there are principles that attract it like growth, humility, and trust. It comes to those whose hearts are yielded to God. You don’t need to strive for it you need only to stay in alignment with His will. As you walk faithfully with Him, His favor will make room for you, speak for you, and sustain you where human strength cannot.`,
+  //       confession:
+  //         "Father, Thank You for Your favor upon my life. I declare that I am highly favored, deeply loved, and blessed beyond measure.",
+  //       tags: ["favor", "grace"],
+  //     },
+  //     {
+  //       id: "but-god-rich-in-mercy",
+  //       title: "But God Who Is Rich in Mercy",
+  //       author: "Apostle Damorn Shunet",
+  //       date: "2024-02-15",
+  //       verse: `Ephesians 2:1–7
+  // “And you He made alive, who were dead in trespasses and sins, in which you once walked according to the course of this world, according to the prince of the power of the air, the spirit who now works in the sons of disobedience, among whom also we all once conducted ourselves in the lusts of our flesh, fulfilling the desires of the flesh and of the mind, and were by nature children of wrath, just as the others. But God, who is rich in mercy, because of His great love with which He loved us, even when we were dead in trespasses, made us alive together with Christ, (by grace you have been saved), and raised us up together, and made us sit together in the heavenly places in Christ Jesus, that in the ages to come He might show the exceeding riches of His grace in His kindness toward us in Christ Jesus.” - Ephesians 2:1–7`,
+  //       excerpt:
+  //         "There are two words in Scripture that change everything — 'But God'. Those words break patterns of despair and rewrite our stories...",
+  //       content: `There are two words in the Bible that change everything, But God. Those words break the pattern of despair and rewrite the story of our lives. Paul paints a dark picture of humanity here, dead in sin, slaves to the flesh, ruled by the enemy, and deserving of death. Then suddenly, mercy enters the story. But God, who is rich in mercy.
 
-The truth is, mercy is not just something God gives it’s who He is. His mercy is richer than our mistakes and stronger than our failures.
+  // Think about that. God didn’t wait for us to get better, cleaner, or more obedient. While we were still in our mess, He loved us. He reached down when we were unreachable and made us alive again through Christ. This is the heartbeat of the gospel, the mercy of the Lord that finds us in death and breathes life again.
 
-Today, rest in that reality. You are living proof of His mercy. No matter what guilt or shame tries to speak, let the words But God silence them all.
-`,
-      confession:
-        "Father, Thank You for Your rich mercy that found me when I was lost. I declare my life is a testimony of Your mercy.",
-      tags: ["mercy", "gospel"],
-    },
-  ];
+  // Every believer has a But God story. Times when you should have been gone, broken, or lost, but God intervened. His mercy rewrote your ending.
 
-  /* -----------------------------  STATE  ----------------------------- */
+  // The truth is, mercy is not just something God gives it’s who He is. His mercy is richer than our mistakes and stronger than our failures.
 
+  // Today, rest in that reality. You are living proof of His mercy. No matter what guilt or shame tries to speak, let the words But God silence them all.`,
+  //       confession:
+  //         "Father, Thank You for Your rich mercy that found me when I was lost. I declare my life is a testimony of Your mercy.",
+  //       tags: ["mercy", "gospel"],
+  //     },
+  //     // Add more devotionals as needed for a fuller experience
+  //   ];
+
+  /* ----------------------------- STATE ----------------------------- */
   const [query, setQuery] = useState("");
   const [authorFilter, setAuthorFilter] = useState("All");
-  const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(6);
+  const [visibleCount, setVisibleCount] = useState(6); // For infinite scroll/load more
   const [selected, setSelected] = useState(null);
-  const [loadMoreMode, setLoadMoreMode] = useState(false);
+  const observerRef = useRef(null);
 
   /* ----------------------------- FILTERING ----------------------------- */
-
-  const authors = ["All", ...new Set(devotionals.map((d) => d.author))];
-
+  const authors = useMemo(
+    () => ["All", ...new Set(devotionals.map((d) => d.author))],
+    [],
+  );
   const filtered = useMemo(() => {
     const q = query.toLowerCase();
     return devotionals.filter((d) => {
@@ -71,44 +90,61 @@ Today, rest in that reality. You are living proof of His mercy. No matter what g
         q === "" ||
         d.title.toLowerCase().includes(q) ||
         d.excerpt.toLowerCase().includes(q) ||
-        (d.tags && d.tags.join(" ").toLowerCase().includes(q));
-
+        (d.tags && d.tags.some((t) => t.toLowerCase().includes(q)));
       return matchAuthor && matchQuery;
     });
-  }, [query, authorFilter]);
+  }, [query, authorFilter, devotionals]);
 
-  /* ----------------------------- PAGINATION ----------------------------- */
+  /* ----------------------------- INFINITE SCROLL ----------------------------- */
+  const itemsToShow = useMemo(
+    () => filtered.slice(0, visibleCount),
+    [filtered, visibleCount],
+  );
+  const hasMore = visibleCount < filtered.length;
 
-  const total = filtered.length;
-  const totalPages = Math.max(1, Math.ceil(total / pageSize));
+  const loadMore = () => {
+    if (hasMore) setVisibleCount((prev) => prev + 6);
+  };
 
-  const itemsToShow = useMemo(() => {
-    if (loadMoreMode) return filtered.slice(0, page * pageSize);
-    const start = (page - 1) * pageSize;
-    return filtered.slice(start, start + pageSize);
-  }, [filtered, page, pageSize, loadMoreMode]);
+  // Intersection Observer for auto-load (infinite scroll)
+  useEffect(() => {
+    if (observerRef.current && hasMore) {
+      const observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) loadMore();
+        },
+        { threshold: 0.1 },
+      );
+      observer.observe(observerRef.current);
+      return () => observer.disconnect();
+    }
+  }, [hasMore]);
+
+  // Debounced search
+  const debouncedSetQuery = debounce(setQuery, 300);
 
   /* ----------------------------- FORMAT DATE ----------------------------- */
-
   const formatDate = (iso) => {
     const d = new Date(iso);
     return d.toLocaleDateString("en-US", {
-      month: "short",
+      month: "long",
       day: "numeric",
       year: "numeric",
     });
   };
 
   /* ----------------------------- MODAL SCROLL LOCK ----------------------------- */
-
   useEffect(() => {
     document.body.style.overflow = selected ? "hidden" : "auto";
+    return () => {
+      document.body.style.overflow = "auto";
+    };
   }, [selected]);
 
   return (
-    <section className="devotionals-page">
-      {/* HEADER */}
-      <div>
+    <section id="devotionals" className="devotionals-section">
+      <div className="container">
+        {/* HEADER */}
         <motion.h2
           className="section-title"
           initial={{ opacity: 0, y: 50 }}
@@ -116,7 +152,7 @@ Today, rest in that reality. You are living proof of His mercy. No matter what g
           transition={{ duration: 0.8 }}
           viewport={{ once: true }}
         >
-          Devotionals
+          Daily Devotionals
         </motion.h2>
         <motion.p
           className="section-subtitle"
@@ -125,155 +161,127 @@ Today, rest in that reality. You are living proof of His mercy. No matter what g
           transition={{ duration: 0.8, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          Short, powerful devotionals to strengthen your walk.{" "}
+          Timeless wisdom to inspire your faith journey. Explore profound
+          insights and spiritual guidance.
         </motion.p>
-      </div>
-      <div className="dev-header">
+
+        {/* CONTROLS */}
         <div className="dev-controls">
-          <div>
+          <div className="search-wrapper">
             <input
               type="search"
-              placeholder="Search devotionals..."
-              value={query}
-              onChange={(e) => {
-                setQuery(e.target.value);
-                setPage(1);
-              }}
+              placeholder="Search by title, excerpt, or tag..."
+              onChange={(e) => debouncedSetQuery(e.target.value)}
             />
           </div>
-
-          <div className="dev-filters">
-            <select
-              value={authorFilter}
-              onChange={(e) => {
-                setAuthorFilter(e.target.value);
-                setPage(1);
-              }}
-            >
-              {authors.map((a) => (
-                <option key={a}>{a}</option>
-              ))}
-            </select>
-
-            <select
-              value={pageSize}
-              onChange={(e) => {
-                setPageSize(Number(e.target.value));
-                setPage(1);
-              }}
-            >
-              {[6, 8, 12, 20].map((n) => (
-                <option key={n}>{n}</option>
-              ))}
-            </select>
-          </div>
-        </div>
-      </div>
-
-      {/* GRID */}
-      <div className="dev-grid">
-        {itemsToShow.map((d) => (
-          <motion.div
-            key={d.id}
-            className="dev-card"
-            whileHover={{ y: -5 }}
-            onClick={() => setSelected(d)}
+          {/* <select
+            value={authorFilter}
+            onChange={(e) => setAuthorFilter(e.target.value)}
           >
-            <div className="dev-card-top">
-              <h3>{d.title}</h3>
-              <span className="dev-date">{formatDate(d.date)}</span>
-            </div>
-
-            <p className="dev-excerpt">{d.excerpt}</p>
-
-            <div className="dev-card-bottom">
-              <span className="dev-author">{d.author}</span>
-
-              <div className="dev-tags">
-                {(d.tags || []).map((t) => (
-                  <span key={t}>{t}</span>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
-
-      {/* FOOTER + PAGINATION */}
-      <div className="dev-footer">
-        <div className="dev-count">
-          Showing {itemsToShow.length} of {total}
+            {authors.map((a) => (
+              <option key={a} value={a}>
+                Author: {a}
+              </option>
+            ))}
+          </select> */}
         </div>
 
-        {!loadMoreMode && (
-          <div className="dev-pagination">
-            <button disabled={page <= 1} onClick={() => setPage(page - 1)}>
-              Prev
-            </button>
-
-            {[...Array(totalPages)].map((_, i) => {
-              const p = i + 1;
-              return (
-                <button
-                  key={p}
-                  onClick={() => setPage(p)}
-                  className={p === page ? "active" : ""}
-                >
-                  {p}
-                </button>
-              );
-            })}
-
-            <button
-              disabled={page >= totalPages}
-              onClick={() => setPage(page + 1)}
-            >
-              Next
-            </button>
-          </div>
-        )}
-      </div>
-
-      {/* MODAL */}
-      <AnimatePresence>
-        {selected && (
-          <motion.div
-            className="dev-modal-backdrop"
-            onClick={() => setSelected(null)}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <motion.div
-              className="dev-modal"
-              onClick={(e) => e.stopPropagation()}
-              initial={{ y: 40, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: 40, opacity: 0 }}
-            >
-              <button className="modal-close" onClick={() => setSelected(null)}>
-                ✕
-              </button>
-
-              <h2 className="modal-title">{selected.title}</h2>
-              <p className="modal-meta">
-                {selected.author} • {formatDate(selected.date)}
-              </p>
-
-              <pre className="modal-verse">{selected.verse}</pre>
-
-              <div className="modal-content">{selected.content}</div>
-
-              {selected.confession && (
-                <div className="modal-confession">
-                  <h4>Confession</h4>
-                  <p>{selected.confession}</p>
+        {/* GRID */}
+        <div className="dev-grid">
+          <AnimatePresence>
+            {itemsToShow.map((d, index) => (
+              <motion.div
+                key={d._id}
+                className="dev-card"
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6, delay: index * 0.1 }}
+                whileHover={{
+                  scale: 1.02,
+                  boxShadow: "0 15px 40px rgba(212, 175, 55, 0.15)",
+                }}
+                onClick={() => setSelected(d)}
+              >
+                <h3 className="dev-title">{d.title}</h3>
+                <p className="dev-meta">
+                  {d.author} • {formatDate(d.date)}
+                </p>
+                <p className="dev-excerpt">{d.excerpt}</p>
+                <div className="dev-tags">
+                  {d.tags.map((t) => (
+                    <span key={t} className="tag">
+                      {t}
+                    </span>
+                  ))}
                 </div>
-              )}
-            </motion.div>
-          </motion.div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
+        </div>
+
+        {/* LOAD MORE / INFINITE SCROLL TRIGGER */}
+        {hasMore && (
+          <div ref={observerRef} className="load-more-trigger">
+            <motion.button
+              className="btn btn-secondary"
+              onClick={loadMore}
+              whileHover={{ scale: 1.05 }}
+            >
+              Load More Devotionals
+            </motion.button>
+          </div>
         )}
-      </AnimatePresence>
+
+        {/* MODAL */}
+        <AnimatePresence>
+          {selected && (
+            <motion.div
+              className="dev-modal-backdrop"
+              onClick={() => setSelected(null)}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4 }}
+            >
+              <motion.div
+                className="dev-modal"
+                onClick={(e) => e.stopPropagation()}
+                initial={{ scale: 0.95, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0.95, opacity: 0 }}
+                transition={{ duration: 0.4 }}
+              >
+                <button
+                  className="modal-close"
+                  onClick={() => setSelected(null)}
+                >
+                  ×
+                </button>
+                <h2 className="modal-title">{selected.title}</h2>
+                <p className="modal-meta">
+                  By {selected.author} • {formatDate(selected.date)}
+                </p>
+                <div className="modal-verse">
+                  <h4>Scripture</h4>
+                  <pre>{selected.verse}</pre>
+                </div>
+                <div className="modal-content">
+                  <h4>Reflection</h4>
+                  {selected.content.split("\n\n").map((para, i) => (
+                    <p key={i}>{para}</p>
+                  ))}
+                </div>
+                {selected.confession && (
+                  <div className="modal-confession">
+                    <h4>Daily Confession</h4>
+                    <p>{selected.confession}</p>
+                  </div>
+                )}
+              </motion.div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
     </section>
   );
 }

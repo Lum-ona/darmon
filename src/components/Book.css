@@ -1,309 +1,271 @@
-.book-section {
-  background: radial-gradient(
-      circle at 50% 20%,
-      rgba(212, 175, 55, 0.08),
-      transparent
-    ),
-    radial-gradient(circle at 80% 80%, rgba(30, 144, 255, 0.08), transparent),
-    var(--bg-dark);
-  padding: 6rem 0;
+.book-hero {
   position: relative;
+  padding: 7rem 1.5rem;
+  background: #0a0a0f;
   overflow: hidden;
 }
 
-/* Animated light streaks */
-.book-section::before,
-.book-section::after {
-  content: "";
+/* Ambient animated background */
+.book-bg-layer {
   position: absolute;
-  width: 120%;
-  height: 120%;
-  background: linear-gradient(
-    120deg,
-    rgba(212, 175, 55, 0.15),
-    transparent 60%
-  );
-  top: -20%;
-  left: -10%;
-  transform: rotate(12deg);
-  filter: blur(50px);
-  opacity: 0.15;
-  animation: moveLight 8s infinite alternate ease-in-out;
+  inset: -20%;
+  background:
+    radial-gradient(
+      circle at 20% 30%,
+      rgba(212, 175, 55, 0.18),
+      transparent 40%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(90, 130, 255, 0.12),
+      transparent 45%
+    );
+  filter: blur(120px);
+  animation: floatBg 12s ease-in-out infinite alternate;
+  z-index: 0;
 }
 
-@keyframes moveLight {
+@keyframes floatBg {
   from {
-    transform: translateX(-5%) rotate(12deg);
+    transform: translateY(-2%);
   }
   to {
-    transform: translateX(5%) rotate(12deg);
+    transform: translateY(2%);
   }
 }
 
-/*------------------------------------------------------------------*
-   GRID LAYOUT
-*-------------------------------------------------------------------*/
-.book-content {
-  display: grid;
-  grid-template-columns: auto auto;
-  gap: 5rem;
-  align-items: center;
-  /* width: 90%; */
+/* Layout */
+.book-shell {
+  position: relative;
+  z-index: 2;
+  max-width: 1200px;
   margin: auto;
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
+  align-items: center;
 }
 
-/*------------------------------------------------------------------*
-   BOOK COVER CARD
-*-------------------------------------------------------------------*/
-.book-cover-container {
+/* COPY */
+.book-copy {
+  color: #e5e7eb;
+}
+
+.book-eyebrow {
+  color: var(--primary-gold);
+  letter-spacing: 2px;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+.book-main-title {
+  font-size: clamp(2.4rem, 5vw, 3.4rem);
+  font-weight: 900;
+  margin: 0.6rem 0;
+  color: #fff;
+}
+
+.book-tagline {
+  font-size: 1.15rem;
+  opacity: 0.8;
+  max-width: 520px;
+}
+
+.book-value {
+  margin: 2rem 0;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.value-item {
+  display: flex;
+  gap: 0.8rem;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+}
+
+.value-item svg {
+  color: var(--primary-gold);
+  font-size: 1.2rem;
+}
+
+.book-body {
+  margin-top: 1.8rem;
+  font-size: 1.05rem;
+  line-height: 1.85;
+  opacity: 0.9;
+}
+
+/* CTA */
+.book-cta {
+  margin-top: 2.5rem;
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.book-order-btn {
+  display: inline-flex;
+  gap: 0.7rem;
+  align-items: center;
+  background: var(--primary-gold);
+  color: #000;
+  font-weight: 800;
+  padding: 1rem 2rem;
+  border-radius: 40px;
+  border: none;
+  cursor: pointer;
+}
+
+.book-price {
+  display: flex;
+  gap: 0.8rem;
+  align-items: baseline;
+}
+
+.price-current {
+  font-size: 1.8rem;
+  font-weight: 900;
+  color: var(--primary-gold);
+}
+
+.price-old {
+  text-decoration: line-through;
+  opacity: 0.6;
+}
+
+/* BOOK VISUAL */
+.book-visual {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.book-cover {
+.book-frame {
   position: relative;
-  width: 350px;
-  height: 520px;
-  transform-style: preserve-3d;
-  perspective: 1300px;
+  width: 320px;
+  perspective: 1200px;
 }
 
-.book-image {
+.book-frame img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 16px;
-  transform: rotateY(-10deg) rotateX(6deg);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-  transition: 0.6s ease;
-  border: 2px solid rgba(212, 175, 55, 0.35);
+  border-radius: 18px;
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.6);
+  border: 1px solid rgba(212, 175, 55, 0.35);
 }
 
-.book-cover:hover .book-image {
-  transform: rotateY(0) rotateX(0) scale(1.03);
-  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.7);
-}
-
-/* Glow aura */
-.book-glow {
+.book-badge {
   position: absolute;
-  inset: 0;
-  filter: blur(45px);
+  top: -14px;
+  right: -14px;
+  background: linear-gradient(45deg, #ff7a18, #ffb347);
+  color: #000;
+  font-weight: 800;
+  padding: 0.4rem 1rem;
   border-radius: 20px;
-  /* background: linear-gradient(45deg, var(--primary-gold), var(--accent-teal)); */
-  opacity: 0.35;
-  z-index: -1;
+  font-size: 0.75rem;
 }
 
-/*------------------------------------------------------------------*
-   TOP BADGE
-*-------------------------------------------------------------------*/
-.floating-badge {
-  position: absolute;
-  top: -12px;
-  right: -12px;
-  background: linear-gradient(45deg, #ff5f6d, #ffc371);
-  color: #fff;
-  padding: 0.55rem 1.2rem;
-  font-weight: 800;
-  font-size: 0.9rem;
-  border-radius: 30px;
-  box-shadow: 0 10px 25px rgba(255, 110, 110, 0.3);
-}
-
-/*------------------------------------------------------------------*
-   TEXT + DETAILS PANEL
-*-------------------------------------------------------------------*/
-.book-details {
-  color: var(--text-normal);
-  animation: fadeInUp 1.2s ease both;
-  z-index: 13;
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.book-title {
-  font-size: 2.4rem;
-  font-weight: 800;
-  color: var(--text-bright);
-  margin-bottom: 0.8rem;
-  text-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
-}
-
-.book-author {
-  font-size: 1.2rem;
-  color: var(--primary-gold);
-  font-weight: 600;
-  margin-bottom: 1.8rem;
-}
-
-/*------------------------------------------------------------------*
-   RATING + DESCRIPTION
-*-------------------------------------------------------------------*/
-.book-rating {
+/* METRICS */
+.book-metrics {
   display: flex;
-  align-items: center;
-  gap: 1rem;
-}
-
-.stars {
-  color: var(--primary-gold);
-  font-size: 1.4rem;
-}
-
-.rating-text {
-  opacity: 0.7;
-  font-size: 0.95rem;
-}
-
-.book-description {
-  margin: 1.5rem 0 2.2rem;
-  font-size: 1.15rem;
-  line-height: 1.85;
-  opacity: 0.92;
-}
-
-/*------------------------------------------------------------------*
-   FEATURES
-*-------------------------------------------------------------------*/
-.book-features {
-  margin-top: 2rem;
-  display: grid;
-  gap: 0.8rem;
-}
-
-.feature {
-  display: flex;
-  gap: 1rem;
-  padding: 0.85rem 1rem;
-  background: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(212, 175, 55, 0.25);
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-  transition: 0.3s ease;
-}
-
-.feature:hover {
-  transform: translateX(8px);
-  border-color: var(--primary-gold);
-  background: rgba(212, 175, 55, 0.15);
-}
-
-/*------------------------------------------------------------------*
-   PRICING
-*-------------------------------------------------------------------*/
-.price-container {
-  margin: 2rem 0;
-  display: flex;
-  align-items: baseline;
-  gap: 1.2rem;
-}
-
-.current-price {
-  font-size: 2.4rem;
-  font-weight: 900;
-  color: var(--primary-gold);
-}
-
-.original-price {
-  font-size: 1.2rem;
-  opacity: 0.6;
-  text-decoration: line-through;
-}
-
-.discount {
-  background: linear-gradient(45deg, #ff5f6d, #ffc371);
-  padding: 0.3rem 0.8rem;
-  border-radius: 15px;
-  color: white;
-  font-size: 0.9rem;
-  font-weight: 800;
-}
-
-/*------------------------------------------------------------------*
-   CTA BUTTONS
-*-------------------------------------------------------------------*/
-.book-actions {
-  display: flex;
-  gap: 1rem;
-  margin-top: 2rem;
-}
-
-.order-btn {
-  background: var(--primary-gold);
-  color: #fff;
-  font-weight: 700;
-  padding: 1rem 2.2rem;
-  border-radius: 50px;
-  transition: 0.3s;
-  border: none;
-  width: 100%;
-}
-
-.order-btn:hover {
-  box-shadow: 0 10px 30px rgba(212, 175, 55, 0.6);
-  transform: translateY(-2px);
-}
-
-.preview-btn {
-  background: transparent;
-  border: 2px solid var(--primary-gold);
-  color: var(--primary-gold);
-  padding: 1rem 2.2rem;
-  border-radius: 50px;
-  font-weight: 700;
-}
-
-.preview-btn:hover {
-  background: rgba(212, 175, 55, 0.25);
-}
-
-/*------------------------------------------------------------------*
-   BOOK STATS
-*-------------------------------------------------------------------*/
-.book-stats {
-  display: flex;
-  gap: 1.8rem;
-  margin-top: 3rem;
-  width: 100%;
-  justify-content: space-around;
-}
-
-.stat {
+  gap: 2rem;
+  margin-top: 2.5rem;
   text-align: center;
 }
 
-.stat-number {
-  font-size: 1.7rem;
-  font-weight: 900;
+.book-metrics strong {
+  display: block;
+  font-size: 1.5rem;
   color: var(--primary-gold);
 }
 
-.stat-label {
-  font-size: 0.85rem;
-  opacity: 0.6;
+.book-metrics span {
+  font-size: 0.8rem;
+  opacity: 0.7;
 }
 
-/*------------------------------------------------------------------*
-   RESPONSIVE
-*-------------------------------------------------------------------*/
+/* Enhance interactivity feel */
+.book-order-btn {
+  display: inline-flex;
+  gap: 0.7rem;
+  align-items: center;
+  background: var(--primary-gold);
+  color: #000;
+  font-weight: 800;
+  padding: 1rem 2rem;
+  border-radius: 40px;
+  border: none;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.book-order-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.35),
+    transparent
+  );
+  transition: left 0.7s;
+}
+
+.book-order-btn:hover::before {
+  left: 150%;
+}
+
+.arrow-icon {
+  transition: transform 0.4s ease;
+}
+
+.book-order-btn:hover .arrow-icon {
+  transform: translateX(6px);
+}
+
+/* Make metrics cards slightly more interactive */
+.book-metrics > div {
+  padding: 1rem 1.4rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(212, 175, 55, 0.18);
+  transition: all 0.35s ease;
+}
+
+.book-metrics > div:hover {
+  background: rgba(212, 175, 55, 0.12);
+  border-color: var(--primary-gold);
+  transform: translateY(-6px);
+}
+
+/* Slight breathing effect on badge */
+.book-badge {
+  box-shadow: 0 4px 15px rgba(255, 123, 24, 0.4);
+}
+
+/* RESPONSIVE */
 @media (max-width: 900px) {
-  .book-content {
+  .book-shell {
     grid-template-columns: 1fr;
-    gap: 4rem;
     text-align: center;
   }
-  .book-stats {
+
+  .book-value {
+    justify-items: center;
+  }
+
+  .book-cta {
     justify-content: center;
   }
 }

@@ -1,30 +1,36 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./App.css";
-import Header from "./components/Header";
-import Hero from "./components/Hero";
-import About from "./components/About";
-import Ministry from "./components/Ministry";
-import Book from "./components/Book";
-import Testimonials from "./components/Testimonials";
-import Sermons from "./components/Sermons";
-import Contact from "./components/Contact";
-import Footer from "./components/Footer";
-import Devotionals from "./components/Devotionals";
+import { Routes, Route, useLocation } from "react-router-dom";
+import Home from "./pages/Home";
+import BlogPost from "./pages/BlogPost";
+import BlogPage from "./pages/BlogPage";
+
+// Custom ScrollToTop component
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    // Scroll to top with smooth behavior
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "smooth",
+    });
+  }, [pathname]); // Trigger on every route change
+
+  return null; // This component doesn't render anything
+};
 
 function App() {
   return (
-    <div className="App">
-      <Header />
-      <Hero />
-      <About />
-      <Ministry />
-      <Book />
-      <Testimonials />
-      <Devotionals />
-      <Sermons />
-      <Contact />
-      <Footer />
-    </div>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/blog" element={<BlogPage />} />
+        <Route path="/blog/:slug" element={<BlogPost />} />
+      </Routes>
+    </>
   );
 }
 
