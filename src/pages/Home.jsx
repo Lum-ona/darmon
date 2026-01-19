@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { motion } from "framer-motion";
 import Header from "../components/Header";
 import Hero from "../components/Hero";
@@ -15,14 +15,17 @@ import BlogSection from "../components/BlogSection";
 export default function Home() {
   const [activeSection, setActiveSection] = useState("home");
 
-  const navItems = [
-    { name: "Home", id: "home" },
-    { name: "About", id: "about" },
-    { name: "Book", id: "book" },
-    { name: "Devotionals", id: "devotionals" },
-    { name: "Blogs", id: "blog-section" },
-    { name: "Sermons", id: "sermons" },
-  ];
+  const navItems = useMemo(
+    () => [
+      { name: "Home", id: "home" },
+      { name: "About", id: "about" },
+      { name: "Book", id: "book" },
+      { name: "Devotionals", id: "devotionals" },
+      { name: "Blogs", id: "blog-section" },
+      { name: "Sermons", id: "sermons" },
+    ],
+    [],
+  ); // Empty dependency array means this only gets computed once
 
   useEffect(() => {
     const handleScroll = () => {
@@ -42,7 +45,7 @@ export default function Home() {
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [navItems]);
+  }, [navItems]); // Now navItems is stable across renders
 
   const scrollToSection = (id) => {
     const element = document.getElementById(id);
