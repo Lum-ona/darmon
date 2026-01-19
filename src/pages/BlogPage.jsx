@@ -5,16 +5,7 @@ import BlogCard from "../components/BlogCard";
 import { blogs, blogCategories } from "../data/blogs";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import {
-  Search,
-  Filter,
-  ChevronRight,
-  TrendingUp,
-  Clock,
-  BookOpen,
-  MessageSquare,
-  Eye,
-} from "lucide-react";
+import { Search, Filter, BookOpen } from "lucide-react";
 import "../styles/Blog.css";
 
 const BlogPage = () => {
@@ -97,18 +88,6 @@ const BlogPage = () => {
     },
   };
 
-  const statsVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        ease: "backOut",
-      },
-    },
-  };
-
   return (
     <div className="blog-page">
       <Header />
@@ -141,72 +120,6 @@ const BlogPage = () => {
               spiritual walk with timeless wisdom.
             </p>
           </motion.div>
-
-          {/* Blog Stats */}
-          {/* <motion.div
-            className="blog-page-stats-grid"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <motion.div
-              className="blog-page-stat-card"
-              variants={statsVariants}
-            >
-              <div className="blog-page-stat-icon blog-page-trending">
-                <TrendingUp size={24} />
-              </div>
-              <div className="blog-page-stat-info">
-                <div className="blog-page-stat-number">{blogs.length}</div>
-                <div className="blog-page-stat-label">Articles Published</div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              className="blog-page-stat-card"
-              variants={statsVariants}
-            >
-              <div className="blog-page-stat-icon blog-page-views">
-                <Eye size={24} />
-              </div>
-              <div className="blog-page-stat-info">
-                <div className="blog-page-stat-number">
-                  {blogs
-                    .reduce((acc, blog) => acc + blog.views, 0)
-                    .toLocaleString()}
-                </div>
-                <div className="blog-page-stat-label">Total Views</div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              className="blog-page-stat-card"
-              variants={statsVariants}
-            >
-              <div className="blog-page-stat-icon blog-page-comments">
-                <MessageSquare size={24} />
-              </div>
-              <div className="blog-page-stat-info">
-                <div className="blog-page-stat-number">
-                  {blogs.reduce((acc, blog) => acc + blog.comments, 0)}
-                </div>
-                <div className="blog-page-stat-label">Engaged Comments</div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              className="blog-page-stat-card"
-              variants={statsVariants}
-            >
-              <div className="blog-page-stat-icon blog-page-reading">
-                <Clock size={24} />
-              </div>
-              <div className="blog-page-stat-info">
-                <div className="blog-page-stat-number">8</div>
-                <div className="blog-page-stat-label">Avg. Read Time (min)</div>
-              </div>
-            </motion.div>
-          </motion.div> */}
         </div>
       </section>
 
@@ -350,45 +263,6 @@ const BlogPage = () => {
               </motion.div>
             )}
           </AnimatePresence>
-
-          {/* Newsletter CTA */}
-          {/* <motion.div
-            className="blog-page-newsletter-cta"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <div className="blog-page-newsletter-content">
-              <h3>Never Miss a Revelation</h3>
-              <p>
-                Subscribe to get weekly apostolic insights delivered directly to
-                your inbox.
-              </p>
-
-              <form className="blog-page-newsletter-form">
-                <input
-                  type="email"
-                  placeholder="Enter your email address"
-                  required
-                />
-                <button type="submit" className="btn btn-primary">
-                  Subscribe
-                  <ChevronRight size={20} />
-                </button>
-              </form>
-
-              <p className="blog-page-newsletter-note">
-                Join 5,000+ believers growing in spiritual understanding
-              </p>
-            </div>
-
-            <div className="blog-page-newsletter-image">
-              <div className="blog-page-image-placeholder">
-                <BookOpen size={48} />
-              </div>
-            </div>
-          </motion.div> */}
         </div>
       </main>
 

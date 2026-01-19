@@ -14,7 +14,6 @@ import {
   Clock,
   Eye,
   MessageCircle,
-  Share2,
   Bookmark,
   Facebook,
   Twitter,
@@ -40,7 +39,6 @@ const BlogPost = () => {
   const [isCopied, setIsCopied] = useState(false);
   const [comment, setComment] = useState("");
   const [comments, setComments] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
   const [relatedBlogs, setRelatedBlogs] = useState([]);
 
   useEffect(() => {
@@ -434,7 +432,7 @@ const BlogPost = () => {
             </div>
 
             {/* Comment Form */}
-            <form
+            {/* <form
               className="blog-post-comment-form"
               onSubmit={handleSubmitComment}
             >
@@ -465,7 +463,7 @@ const BlogPost = () => {
                   {isLoading ? "Posting..." : "Post Comment"}
                 </button>
               </div>
-            </form>
+            </form> */}
 
             {/* Comments List */}
             <AnimatePresence>

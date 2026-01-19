@@ -113,7 +113,7 @@ const FooterColumn = ({ title, links, delay }) => (
     <ul>
       {links.map((link, i) => (
         <li key={i}>
-          <a href={link.url}>{link.label}</a>
+          <a href="/about">{link.label}</a>
         </li>
       ))}
     </ul>

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { motion, useAnimation } from "framer-motion";
 import { useInView } from "react-intersection-observer"; // Install via npm if needed: react-intersection-observer
 import "./Hero.css";
@@ -10,25 +10,29 @@ const Hero = () => {
   const [stats, setStats] = useState([0, 0, 0, 0]);
   const targetStats = [70000, 1, 10, 2];
 
-  useEffect(() => {
-    if (inView) {
-      controls.start("visible");
-      const intervals = targetStats.map((target, i) => {
-        const increment = target / 100; // Smooth steps
-        let current = 0;
-        return setInterval(() => {
-          current += increment;
-          if (current >= target) current = target;
-          setStats((prev) => {
-            const newStats = [...prev];
-            newStats[i] = Math.floor(current);
-            return newStats;
-          });
-        }, 20);
-      });
-      return () => intervals.forEach(clearInterval);
-    }
-  }, [inView, controls]);
+  useEffect(
+    () => {
+      if (inView) {
+        controls.start("visible");
+        const intervals = targetStats.map((target, i) => {
+          const increment = target / 100; // Smooth steps
+          let current = 0;
+          return setInterval(() => {
+            current += increment;
+            if (current >= target) current = target;
+            setStats((prev) => {
+              const newStats = [...prev];
+              newStats[i] = Math.floor(current);
+              return newStats;
+            });
+          }, 20);
+        });
+        return () => intervals.forEach(clearInterval);
+      }
+    },
+    [inView, controls],
+    targetStats,
+  );
 
   const containerVariants = {
     hidden: { opacity: 0 },

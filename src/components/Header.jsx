@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./Header.css";
@@ -11,7 +11,6 @@ const Header = () => {
 
   // Check if we're on the home page or blog page
   const isHomePage = location.pathname === "/";
-  const isBlogPage = location.pathname.startsWith("/blog");
 
   useEffect(() => {
     const handleScroll = () => {
