@@ -3,6 +3,18 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  cursor: none !important;
+}
+
+/* Maintain Pointer for Interactive Elements */
+a,
+button,
+[role="button"],
+.home-hero-dock-item,
+input,
+select,
+textarea {
+  cursor: pointer !important;
 }
 
 :root {

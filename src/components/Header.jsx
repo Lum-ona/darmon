@@ -1,159 +1,131 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import { FiMenu, FiX, FiArrowRight } from "react-icons/fi";
 import "./Header.css";
+import logo from "../assets/gallery/darmon-logo-nobg.png";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
 
-  // Check if we're on the home page or blog page
-  const isHomePage = location.pathname === "/";
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
-
-    // Only add scroll listener on home page
-    if (isHomePage) {
-      window.addEventListener("scroll", handleScroll);
-    } else {
-      setIsScrolled(true); // Always show scrolled style on other pages
-    }
-
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [isHomePage]);
-
-  // Handle navigation - either scroll on home page or navigate from other pages
-  const handleNavigation = (sectionId) => {
-    if (isHomePage) {
-      // On home page, scroll to section
-      const element = document.getElementById(sectionId);
-      if (element) {
-        window.scrollTo({
-          top: element.offsetTop - 100,
-          behavior: "smooth",
-        });
-      }
-      setIsMobileMenuOpen(false);
-    } else {
-      // On other pages, navigate to home page with hash
-      navigate(`/#${sectionId}`);
-      setIsMobileMenuOpen(false);
-    }
-  };
-
-  const navItems = [
-    { name: "Home", id: "home" },
-    { name: "About", id: "about" },
-    { name: "Ministry", id: "ministry" },
-    { name: "Book", id: "book" },
-    { name: "Testimonials", id: "testimonials" },
-    { name: "Devotionals", id: "devotionals" },
-    { name: "Blog", id: "blog" },
-    { name: "Sermons", id: "sermons" },
-    { name: "Contact", id: "contact" },
+  // Unified items (Header + Dock)
+  const menuItems = [
+    { name: "Home", path: "/", type: "link" },
+    { name: "About", path: "/#about", type: "anchor" },
+    { name: "Sermons", path: "/#sermons", type: "anchor" },
+    { name: "Blog", path: "/blog", type: "link" },
   ];
 
+  useEffect(() => {
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Close menu on route change
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location]);
+
   return (
-    <motion.header
-      className={`header ${isScrolled ? "scrolled" : ""}`}
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.8 }}
-    >
-      <div className="container">
-        <nav className="nav">
-          <motion.div
-            className="logo"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <Link to="/" className="logo-link">
-              <span className="logo-text">Damorn Shunet</span>
+    <>
+      <motion.header
+        className={`site-header ${isScrolled ? "scrolled" : ""} ${isMenuOpen ? "menu-open" : ""}`}
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+      >
+        <div className="header-container">
+          <Link to="/" className="logo-wrapper">
+            <img src={logo} alt="darmon shunet" className="header-logo" />
+          </Link>
+
+          {/* DESKTOP NAV */}
+          <nav className="desktop-nav">
+            <Link to="/" className={location.pathname === "/" ? "active" : ""}>
+              HOME
             </Link>
-          </motion.div>
+            <Link
+              to="/blog"
+              className={location.pathname.includes("/blog") ? "active" : ""}
+            >
+              BLOG
+            </Link>
+            <a
+              href="https://wa.me/p/31587987360848672/254727129129"
+              target="_blank"
+              className="header-cta"
+            >
+              GET THE BOOK
+            </a>
+          </nav>
 
-          <div className="nav-items">
-            {navItems.map((item, index) => (
-              <motion.button
-                key={item.id}
-                onClick={() => handleNavigation(item.id)}
-                className="nav-link"
-                whileHover={{ scale: 1.05, color: "var(--primary-gold)" }}
-                transition={{ delay: index * 0.1 }}
-                style={{
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  fontFamily: "inherit",
-                  fontSize: "inherit",
-                  color: "inherit",
-                  padding: 0,
-                  textDecoration: "none",
-                }}
-              >
-                {item.name}
-              </motion.button>
-            ))}
-
-            {/* Blog link that goes to blog page */}
-            {isHomePage && (
-              <Link to="/blog" className="nav-link blog-link">
-                Blog
-              </Link>
-            )}
-          </div>
-
-          <motion.button
-            className={`menu-toggle ${isMobileMenuOpen ? "open" : ""}`}
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            whileTap={{ scale: 0.9 }}
+          {/* MOBILE TOGGLE */}
+          <button
+            className="mobile-toggle"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle Menu"
           >
-            <span></span>
-            <span></span>
-            <span></span>
-          </motion.button>
-        </nav>
-      </div>
+            {isMenuOpen ? <FiX /> : <FiMenu />}
+          </button>
+        </div>
+      </motion.header>
 
+      {/* MOBILE OVERLAY */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {isMenuOpen && (
           <motion.div
-            className="mobile-menu"
+            className="mobile-overlay"
             initial={{ opacity: 0, x: "100%" }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: "100%" }}
-            transition={{ duration: 0.3 }}
+            transition={{ type: "spring", damping: 25, stiffness: 200 }}
           >
-            {navItems.map((item, index) => (
-              <button
-                key={item.id}
-                onClick={() => handleNavigation(item.id)}
-                className="mobile-nav-link"
-                style={{
-                  background: "none",
-                  border: "none",
-                  cursor: "pointer",
-                  fontFamily: "inherit",
-                  fontSize: "inherit",
-                  color: "inherit",
-                  padding: "1rem 2rem",
-                  textDecoration: "none",
-                  textAlign: "left",
-                  width: "100%",
-                }}
-              >
-                {item.name}
-              </button>
-            ))}
+            <div className="mobile-menu-content">
+              <div className="menu-header">
+                <span className="terminal-text">MENU_SYSTEM_v3.0</span>
+              </div>
+
+              <div className="mobile-links">
+                {menuItems.map((item, i) => (
+                  <motion.div
+                    key={item.name}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 * i }}
+                  >
+                    {item.type === "link" ? (
+                      <Link to={item.path} className="mobile-link">
+                        <span className="link-num">0{i + 1}</span>
+                        {item.name}
+                        <FiArrowRight className="arrow" />
+                      </Link>
+                    ) : (
+                      <a href={item.path} className="mobile-link">
+                        <span className="link-num">0{i + 1}</span>
+                        {item.name}
+                        <FiArrowRight className="arrow" />
+                      </a>
+                    )}
+                  </motion.div>
+                ))}
+              </div>
+
+              <div className="mobile-footer">
+                <a
+                  href="https://wa.me/p/31587987360848672/254727129129"
+                  target="_blank"
+                  className="mobile-cta"
+                >
+                  GET THE BOOK
+                </a>
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </motion.header>
+    </>
   );
 };
 

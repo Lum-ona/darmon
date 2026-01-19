@@ -11,88 +11,99 @@ const Ministry = () => {
     {
       image: regin,
       title: "Reign City Chapel",
+      tag: "Church Plant",
       description:
-        "Founder and Lead Pastor of a thriving Christ-centered ministry committed to equipping believers to walk in power, purpose and dominion. Sunday services at KICC, Aberdare Hall.",
+        "Founder and Lead Pastor. Sunday services at KICC, Aberdare Hall.",
       link: "https://www.instagram.com/reigncitychapel/",
     },
     {
       image: genz,
       title: "Gen Z Loves Jesus",
+      tag: "Youth Movement",
       description:
-        "Vision-bearer and founder of a movement passionate about seeing Generation Z fall in love with Jesus, walk in His light, and impact the world through His love.",
+        "A global movement seeing a generation fall in love with Jesus.",
       link: "https://www.instagram.com/genz_lovesjesus/",
     },
     {
       image: author,
       title: "Author & Writer",
-      description:
-        "Author of transformative books including 'What God Says About Your Identity' and 'The Unseen Advantage' that provide biblical insights into spiritual realities.",
+      tag: "Literature",
+      description: "Transformative books including 'The Unseen Advantage'.",
       link: "https://wa.me/p/31587987360848672/254727129129",
     },
     {
       image: music,
       title: "Music Ministry",
+      tag: "Worship Artist",
       description:
-        "Gifted artist and songwriter using music as a vessel to communicate the message of grace, faith, and devotion to Christ through worship-driven sound.",
+        "Communicating grace and faith through worship-driven sound.",
       link: "https://www.youtube.com/watch?v=u17JGgXY194",
     },
   ];
 
   return (
-    <section id="ministry" className="section ministry-section">
-      <div className="container">
-        <motion.h2
-          className="section-title"
-          initial={{ opacity: 0, y: 50 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-        >
-          Ministry & Mission
-        </motion.h2>
+    <section id="ministry" className="ministry-section">
+      <div className="ministry-container">
+        {/* SECTION HEADER */}
+        <div className="ministry-header">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            viewport={{ once: true }}
+          >
+            <span className="ministry-eyebrow">Kingdom Impact</span>
+            <h2 className="ministry-main-title">
+              Ministries & <span>Mission</span>
+            </h2>
+          </motion.div>
 
-        <motion.p
-          className="section-subtitle"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          Advancing God's Kingdom through various ministry expressions and
-          platforms
-        </motion.p>
+          <motion.p
+            className="ministry-intro"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
+            Advancing God's Kingdom through diverse platforms, from church
+            planting to global youth movements and literature.
+          </motion.p>
+        </div>
 
-        <div className="ministry-grid">
-          {ministries.map((ministry, index) => (
+        {/* MODERN BENTO GRID */}
+        <div className="ministry-modern-grid">
+          {ministries.map((item, index) => (
             <motion.div
-              key={ministry.title}
-              className="ministry-card"
-              initial={{ opacity: 0, y: 50 }}
+              key={item.title}
+              className={`ministry-box box-${index + 1}`}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
+              transition={{ duration: 0.6, delay: index * 0.15 }}
               viewport={{ once: true }}
-              whileHover={{
-                y: -10,
-              }}
             >
-              <div className="ministry-image-container">
-                <img
-                  src={ministry.image}
-                  alt={ministry.title}
-                  className="ministry-image"
-                />
-                <div className="ministry-image-overlay"></div>
-                <div className="ministry-content">
-                  <h3 className="ministry-title">{ministry.title}</h3>
-                  <p className="ministry-description">{ministry.description}</p>
-                  <motion.a
-                    href={ministry.link}
-                    className="ministry-link"
-                    whileHover={{ x: 5 }}
-                    transition={{ duration: 0.3 }}
-                  >
-                    Learn More →
-                  </motion.a>
+              <div className="ministry-card-inner">
+                <div className="ministry-image-wrapper">
+                  <img src={item.image} alt={item.title} />
+                  <div className="ministry-card-overlay" />
+                </div>
+
+                <div className="ministry-card-content">
+                  <div className="card-top">
+                    <span className="card-index">0{index + 1}</span>
+                    <span className="card-tag">{item.tag}</span>
+                  </div>
+
+                  <div className="card-bottom">
+                    <h3>{item.title}</h3>
+                    <p>{item.description}</p>
+                    <motion.a
+                      href={item.link}
+                      className="ministry-btn"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                    >
+                      Explore Impact
+                    </motion.a>
+                  </div>
                 </div>
               </div>
             </motion.div>

@@ -1,0 +1,32 @@
+/* ===== MODERN BLOG CARD V2 STYLES ===== */
+.blog-card-v2-link {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.blog-card-v2-image-box::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.4), transparent);
+  pointer-events: none;
+}
+
+.blog-card-v2-title {
+  transition: color 0.3s ease;
+}
+
+.blog-card-v2:hover .blog-card-v2-title {
+  color: var(--primary-gold);
+}
+
+.read-action {
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.blog-card-v2:hover .read-action {
+  transform: translate(3px, -3px);
+}

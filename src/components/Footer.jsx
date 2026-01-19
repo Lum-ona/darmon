@@ -1,123 +1,107 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaFacebookF, FaInstagram, FaYoutube, FaPodcast } from "react-icons/fa";
+import { FaFacebookF, FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa";
+import { FiArrowUpRight, FiShield, FiGlobe, FiCpu } from "react-icons/fi";
 import "./Footer.css";
 
-const socialLinks = [
-  { icon: <FaFacebookF />, url: "https://facebook.com" },
-  { icon: <FaInstagram />, url: "https://instagram.com" },
-  { icon: <FaYoutube />, url: "https://youtube.com" },
-  { icon: <FaPodcast />, url: "https://podcasts.apple.com" },
-];
-
 const Footer = () => {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="footer">
-      <div className="container">
-        <div className="footer-content">
-          <motion.div
-            className="footer-brand"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
-          >
-            <div className="footer-logo">
-              <span className="logo-text">Darmon Shunet</span>
-            </div>
-            <p className="footer-description">
-              Spreading the Gospel with Power, Purpose, and Divine Authority to
-              all nations.
+    <footer className="footer-v3">
+      {/* Decorative Top Border */}
+      <div className="footer-top-line">
+        <div className="line-glow" />
+      </div>
+
+      <div className="footer-container-v3">
+        <div className="footer-main-grid">
+          {/* BRAND COLUMN */}
+          <div className="footer-brand-v3">
+            <motion.div
+              className="brand-logo-v3"
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+            >
+              <h2 className="footer-logo-text">
+                DAMORN <span className="stroke-text">SHUNET</span>
+              </h2>
+            </motion.div>
+            <p className="brand-manifesto">
+              Advancing the Kingdom through Apostolic Intelligence and Prophetic
+              Clarity. Establishing a standard of excellence for the next
+              generation of believers.
             </p>
-            <div className="social-links">
-              {socialLinks.map((link, i) => (
-                <motion.a
-                  key={i}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="social-link"
-                  whileHover={{ scale: 1.2, y: -2 }}
-                  whileTap={{ scale: 0.9 }}
-                >
-                  {link.icon}
-                </motion.a>
+            <div className="footer-social-v3">
+              {[
+                <FaFacebookF />,
+                <FaInstagram />,
+                <FaYoutube />,
+                <FaTiktok />,
+              ].map((icon, i) => (
+                <a href="#" key={i} className="social-icon-v3">
+                  {icon}
+                </a>
               ))}
             </div>
-          </motion.div>
+          </div>
 
-          <div className="footer-links">
-            <FooterColumn
-              title="Ministry"
-              links={[
-                { label: "About Us", url: "#" },
-                { label: "Our Beliefs", url: "#" },
-                { label: "Leadership", url: "#" },
-                { label: "Global Missions", url: "#" },
-              ]}
-              delay={0.1}
-            />
-            <FooterColumn
-              title="Resources"
-              links={[
-                { label: "Sermons", url: "#" },
-                { label: "Books", url: "#" },
-                { label: "Articles", url: "#" },
-                { label: "Prayer Requests", url: "#" },
-              ]}
-              delay={0.2}
-            />
-            <FooterColumn
-              title="Connect"
-              links={[
-                { label: "Events", url: "#" },
-                { label: "Volunteer", url: "#" },
-                { label: "Give", url: "#" },
-                { label: "Contact", url: "#" },
-              ]}
-              delay={0.3}
-            />
+          {/* NAVIGATION COLUMNS */}
+          <div className="footer-nav-group">
+            <div className="footer-col-v3">
+              <h4 className="col-title">TRANSITIONS</h4>
+              <a href="#about">The Mandate</a>
+              <a href="#sermons">Media Archive</a>
+              <a href="#blog">Intelligence Log</a>
+              <a href="#contact">Global Booking</a>
+            </div>
+
+            <div className="footer-col-v3">
+              <h4 className="col-title">RESOURCES</h4>
+              <a href="#">Ministry Partners</a>
+              <a href="#">Prophetic School</a>
+              <a href="#">Digital Giving</a>
+              <a href="#">Terms of Covenant</a>
+            </div>
+          </div>
+
+          {/* NEWSLETTER/CTA COLUMN */}
+          <div className="footer-newsletter-v3">
+            <h4 className="col-title">SYSTEM UPDATES</h4>
+            <p>Join the digital remnant for weekly transmissions.</p>
+            <div className="footer-input-box">
+              <input type="email" placeholder="ENCRYPTED EMAIL" />
+              <button>
+                <FiArrowUpRight />
+              </button>
+            </div>
           </div>
         </div>
 
-        <motion.div
-          className="footer-bottom"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          viewport={{ once: true }}
-        >
-          <p>
-            &copy; {new Date().getFullYear()} Apostle Darmon Shunet Ministries.
-            All rights reserved.
-          </p>
-          <div className="footer-legal">
-            <a href="#">Privacy Policy</a>
-            <a href="#">Terms of Service</a>
+        {/* BOTTOM TECHNICAL BAR */}
+        <div className="footer-bottom-v3">
+          <div className="bottom-meta">
+            <span className="meta-item">
+              <FiCpu /> SYNC_STATUS: OPTIMAL
+            </span>
+            <span className="meta-item">
+              <FiGlobe /> REGION: NAIROBI, GLOBAL
+            </span>
           </div>
-        </motion.div>
+
+          <div className="bottom-copyright">
+            <p>&copy; {currentYear} DAMORN SHUNET MINISTRIES</p>
+          </div>
+
+          <div className="bottom-legal">
+            <a href="#">PRIVACY_VAULT</a>
+            <span className="divider">/</span>
+            <a href="#">LEGAL_DECREE</a>
+          </div>
+        </div>
       </div>
     </footer>
   );
 };
-
-const FooterColumn = ({ title, links, delay }) => (
-  <motion.div
-    className="footer-column"
-    initial={{ opacity: 0, y: 50 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.8, delay }}
-    viewport={{ once: true }}
-  >
-    <h4>{title}</h4>
-    <ul>
-      {links.map((link, i) => (
-        <li key={i}>
-          <a href="/about">{link.label}</a>
-        </li>
-      ))}
-    </ul>
-  </motion.div>
-);
 
 export default Footer;

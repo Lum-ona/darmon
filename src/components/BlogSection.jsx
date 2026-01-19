@@ -1,85 +1,69 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import BlogCard from "./BlogCard";
-import { ChevronRight, BookOpen } from "lucide-react";
-import "../styles/Blog.css";
+import { ChevronRight, BookOpen, Sparkles } from "lucide-react";
+import "../styles/BlogSection.css";
 import { featuredBlogs } from "../data/blogs";
 
 const BlogSection = () => {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
   return (
-    <section className="blog-section" id="blog">
+    <section className="blog-section-modern" id="blog">
+      {/* Dynamic Background Pattern */}
+      <div className="blog-mesh-grid" />
+      <div className="blog-glow-orb" />
+
       <div className="blog-section-container">
         {/* Section Header */}
-        <motion.div
-          className="blog-section-header"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-50px" }}
-          transition={{ duration: 0.8 }}
-        >
-          <div className="blog-section-label">
-            <BookOpen size={20} />
-            <span>APOSTOLIC INSIGHTS</span>
-          </div>
+        <header className="blog-modern-header">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="blog-header-left"
+          >
+            <div className="blog-badge-glow">
+              <Sparkles size={14} className="sparkle-icon" />
+              <span>Apostolic Wisdom</span>
+            </div>
+            <h2 className="blog-title-main">
+              Divine Revelations & <br />
+              <span className="text-outline">Kingdom Teachings</span>
+            </h2>
+          </motion.div>
 
-          <h2 className="blog-section-title">
-            Divine Revelations &<br />
-            <span className="blog-section-gradient-text">
-              {" "}
-              Kingdom Teachings
-            </span>
-          </h2>
-
-          <p className="blog-section-description">
-            Deep biblical insights, prophetic revelations, and practical kingdom
-            principles from Apostle Darmon Shunet. Transform your spiritual walk
-            with apostolic wisdom.
-          </p>
-        </motion.div>
-
-        {/* Blog Grid */}
-        <motion.div
-          className="blog-section-grid"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {featuredBlogs.slice(0).map((blog) => (
-            <BlogCard key={blog.id} blog={blog} />
-          ))}
-        </motion.div>
-
-        {/* CTA Section */}
-        <motion.div
-          className="blog-section-cta"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-        >
-          <div className="blog-section-cta-content">
-            <h3>Hungry for More Revelation?</h3>
+          <motion.div
+            className="blog-header-right"
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ delay: 0.3 }}
+          >
             <p>
-              Explore all teachings, prophetic insights, and apostolic wisdom in
-              our full blog archive.
+              Deep biblical insights and prophetic revelations to transform your
+              spiritual walk.
             </p>
+          </motion.div>
+        </header>
+
+        {/* Blog Grid with Staggered Entrance */}
+        <div className="blog-main-grid">
+          {featuredBlogs.slice(0, 3).map((blog, index) => (
+            <BlogCard key={blog.id} blog={blog} index={index} />
+          ))}
+        </div>
+
+        {/* Enhanced CTA */}
+        <motion.div className="blog-footer-cta" whileHover={{ scale: 1.01 }}>
+          <div className="cta-glass-blur" />
+          <div className="cta-content">
+            <div className="cta-text">
+              <h3>Hungry for More Revelation?</h3>
+              <p>Join thousands of readers in our full apostolic archive.</p>
+            </div>
+            <Link to="/blog" className="blog-view-all-btn">
+              Explore Archive
+              <ChevronRight size={20} />
+            </Link>
           </div>
-          <Link to="/blog" className="btn btn-secondary">
-            View All Articles
-            <ChevronRight size={20} />
-          </Link>
         </motion.div>
       </div>
     </section>

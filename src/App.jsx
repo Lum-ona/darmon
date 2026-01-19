@@ -4,26 +4,20 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import BlogPost from "./pages/BlogPost";
 import BlogPage from "./pages/BlogPage";
+import SmokeCursor from "./components/SmokeCursor";
 
-// Custom ScrollToTop component
 const ScrollToTop = () => {
   const { pathname } = useLocation();
-
   useEffect(() => {
-    // Scroll to top with smooth behavior
-    window.scrollTo({
-      top: 0,
-      left: 0,
-      behavior: "smooth",
-    });
-  }, [pathname]); // Trigger on every route change
-
-  return null; // This component doesn't render anything
+    window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+  }, [pathname]);
+  return null;
 };
 
 function App() {
   return (
     <>
+      <SmokeCursor /> {/* Global interactive smoke effect */}
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
