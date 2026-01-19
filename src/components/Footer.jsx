@@ -88,7 +88,8 @@ const Footer = () => {
           viewport={{ once: true }}
         >
           <p>
-            &copy; 2026 Apostle Darmon Shunet Ministries. All rights reserved.
+            &copy; {new Date().getFullYear()} Apostle Darmon Shunet Ministries.
+            All rights reserved.
           </p>
           <div className="footer-legal">
             <a href="#">Privacy Policy</a>
