@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import BlogCard from "./BlogCard";
 import { ChevronRight, BookOpen } from "lucide-react";
 import "../styles/Blog.css";
+import { featuredBlogs } from "../data/blogs";
 
 const BlogSection = () => {
   const containerVariants = {
