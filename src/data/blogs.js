@@ -7,7 +7,7 @@ export const blogs = [
     content: `
 # The Foundation of Spiritual Authority
 
-Many believers pray but do not rule. They ask but do not command. The difference lies in understanding that **authority is not emotion—it is position.**
+Many believers pray but do not rule. They ask but do not command. The difference lies in understanding that **authority is not emotion it is position.**
 
 ## The Divine Delegation
 
@@ -103,7 +103,7 @@ The time for passive Christianity is over. Rise up and take your place in God's 
     content: `
 # The Multi-Dimensional Reality of Spiritual Warfare
 
-Spiritual warfare is not drama—it is governance. The battles we face are often decided long before they manifest in the natural realm. As believers, we must learn to discern and engage in these unseen dimensions.
+Spiritual warfare is not drama it is governance. The battles we face are often decided long before they manifest in the natural realm. As believers, we must learn to discern and engage in these unseen dimensions.
 
 ## Understanding the Three Realms
 
@@ -136,7 +136,7 @@ Right standing with God protects your heart from condemnation.
 Truth anchors everything else. You can't fight effectively while believing lies.
 
 ### The Gospel of Peace
-Your foundation determines your stability. Peace isn't passive—it's a position of strength.
+Your foundation determines your stability. Peace isn't passive it's a position of strength.
 
 ## Strategic Warfare Principles
 
@@ -343,7 +343,7 @@ Talent without discipline leads to exhaustion. Solution: Sustainable rhythms, Sa
 
 ## The Grace-Discipline Balance
 
-Discipline without grace leads to legalism. Grace without discipline leads to license. The sweet spot is **disciplined grace**—structured dependence on God.
+Discipline without grace leads to legalism. Grace without discipline leads to license. The sweet spot is **disciplined grace** structured dependence on God.
 
 ## Signs Your Discipline Needs Adjustment
 
@@ -373,7 +373,7 @@ Discipline without grace leads to legalism. Grace without discipline leads to li
 
 ## The Ultimate Goal: Christlikeness
 
-Discipline isn't about earning God's love—it's about positioning ourselves to receive more of His life. As we're transformed, we become conduits of His glory to a dying world.
+Discipline isn't about earning God's love it's about positioning ourselves to receive more of His life. As we're transformed, we become conduits of His glory to a dying world.
 
 > "No discipline seems pleasant at the time, but painful. Later on, however, it produces a harvest of righteousness and peace for those who have been trained by it." - Hebrews 12:11
 
@@ -413,7 +413,7 @@ Your future anointing is being cultivated in today's discipline. Don't despise t
     title:
       "Financial Dominion: Stewarding Earth's Resources for Heaven's Agenda",
     excerpt:
-      "Money is not the root of evil—the love of it is. Discover how to handle finances with kingdom principles that create wealth for God's purposes.",
+      "Money is not the root of evil the love of it is. Discover how to handle finances with kingdom principles that create wealth for God's purposes.",
     date: "April 12, 2025",
     readTime: "9 min read",
     category: "Kingdom Living",

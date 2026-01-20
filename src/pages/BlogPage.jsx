@@ -5,7 +5,7 @@ import BlogCard from "../components/BlogCard";
 import { blogs, blogCategories } from "../data/blogs";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
-import { Search, Filter, BookOpen, Terminal, LayoutGrid } from "lucide-react";
+import { Search, Filter, Terminal, LayoutGrid } from "lucide-react";
 import "../styles/BlogPage.css";
 
 const BlogPage = () => {
@@ -51,7 +51,7 @@ const BlogPage = () => {
           >
             <div className="archive-badge">
               <Terminal size={14} />
-              <span>DATABASE_ACCESS: GRANTED</span>
+              <span>HEAVEN_ACCESS: GRANTED</span>
             </div>
             <h1 className="archive-title">
               Apostolic <span className="stroke-text">Archives</span> & <br />

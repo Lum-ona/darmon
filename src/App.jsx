@@ -4,7 +4,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Home from "./pages/Home";
 import BlogPost from "./pages/BlogPost";
 import BlogPage from "./pages/BlogPage";
-import SmokeCursor from "./components/SmokeCursor";
+// import SmokeCursor from "./components/SmokeCursor";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -17,7 +17,7 @@ const ScrollToTop = () => {
 function App() {
   return (
     <>
-      <SmokeCursor /> {/* Global interactive smoke effect */}
+      {/* <SmokeCursor /> */}
       <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />

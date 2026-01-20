@@ -116,7 +116,7 @@
 /* LAYOUT */
 .post-v3-layout {
   display: grid;
-  grid-template-columns: 1fr 350px;
+  grid-template-columns: 1fr 280px;
   gap: 80px;
 }
 
