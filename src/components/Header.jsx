@@ -55,6 +55,7 @@ const Header = () => {
             <a
               href="https://wa.me/p/31587987360848672/254727129129"
               target="_blank"
+              rel="noopener noreferrer"
               className="header-cta"
             >
               GET THE BOOK
@@ -116,6 +117,7 @@ const Header = () => {
                 <a
                   href="https://wa.me/p/31587987360848672/254727129129"
                   target="_blank"
+                  rel="noopener noreferrer"
                   className="mobile-cta"
                 >
                   GET THE BOOK

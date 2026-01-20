@@ -5,7 +5,7 @@ import bookImg from "../assets/book/book.jpeg";
 
 const Book = () => {
   const handleOrderClick = () => {
-    window.open("https://wa.me/p/31587987360848672/254727129129", "_blank");
+    window.open("https://wa.me/p/31587987360848672/254727129129", "_blank" rel="noopener noreferrer");
   };
 
   // 3D Tilt Logic
