@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import BlogCard from "./BlogCard";
-import { ChevronRight, BookOpen, Sparkles } from "lucide-react";
+import { ChevronRight, Sparkles } from "lucide-react";
 import "../styles/BlogSection.css";
 import { featuredBlogs } from "../data/blogs";
 

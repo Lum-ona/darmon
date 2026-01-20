@@ -1,6 +1,5 @@
-import React from "react";
 import { motion } from "framer-motion";
-import { Scale, BookOpen, Music } from "lucide-react"; // Import Lucide icons
+import { Scale, Music } from "lucide-react"; // Import Lucide icons
 import "./About.css";
 import apostle from "../assets/gallery/IMG_1107.jpg";
 

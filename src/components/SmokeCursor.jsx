@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import { motion, useSpring } from "framer-motion";
 
 export default function SmokeCursor() {

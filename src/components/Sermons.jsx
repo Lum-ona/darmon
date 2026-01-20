@@ -1,6 +1,5 @@
-import React from "react";
 import { motion } from "framer-motion";
-import { Play, Youtube, Clock, Eye, Share2, Radio } from "lucide-react";
+import { Play, Clock, Eye, Share2, Radio } from "lucide-react";
 import "./Sermons.css";
 
 const Sermons = () => {

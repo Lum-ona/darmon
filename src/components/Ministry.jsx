@@ -1,4 +1,3 @@
-import React from "react";
 import { motion } from "framer-motion";
 import "./Ministry.css";
 import regin from "../assets/gallery/IMG_1241.jpg";

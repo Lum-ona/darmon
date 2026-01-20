@@ -1,4 +1,3 @@
-import React from "react";
 import { motion, useMotionValue, useSpring, useTransform } from "framer-motion";
 import { FiArrowRight, FiBookOpen, FiStar, FiGlobe } from "react-icons/fi";
 import "./Book.css";

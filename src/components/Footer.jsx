@@ -1,7 +1,6 @@
-import React from "react";
 import { motion } from "framer-motion";
 import { FaFacebookF, FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa";
-import { FiArrowUpRight, FiShield, FiGlobe, FiCpu } from "react-icons/fi";
+import { FiArrowUpRight, FiGlobe, FiCpu } from "react-icons/fi";
 import "./Footer.css";
 
 const Footer = () => {

@@ -6,7 +6,7 @@ import React, {
   useCallback,
 } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FiSearch, FiCalendar, FiUser, FiHash, FiX } from "react-icons/fi";
+import { FiSearch, FiUser, FiHash, FiX } from "react-icons/fi";
 import "./Devotionals.css";
 import debounce from "lodash/debounce";
 import { sanityClient } from "../sanityClient";

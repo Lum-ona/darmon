@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { motion, useScroll, useSpring } from "framer-motion";
 import ReactMarkdown from "react-markdown";
@@ -10,14 +10,10 @@ import {
   ArrowLeft,
   Calendar,
   Clock,
-  Eye,
   Share2,
   Bookmark,
   Facebook,
   Twitter,
-  Linkedin,
-  Copy,
-  Check,
   User,
   Heart,
   Shield,
@@ -31,7 +27,6 @@ const BlogPost = () => {
 
   const [isBookmarked, setIsBookmarked] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
-  const [isCopied, setIsCopied] = useState(false);
 
   const { scrollYProgress } = useScroll();
   const scaleX = useSpring(scrollYProgress, { stiffness: 100, damping: 30 });
