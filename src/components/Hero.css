@@ -202,3 +202,8 @@
     padding-top: 100px; /* Offset for the sticky header */
   }
 }
+@media (max-width: 572px) {
+  .dock-wrapper {
+    display: none !important; /* The Mobile Menu now handles these links */
+  }
+}
