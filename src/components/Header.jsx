@@ -29,6 +29,25 @@ const Header = () => {
     setIsMenuOpen(false);
   }, [location]);
 
+  const scrollToSection = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop - 100,
+        behavior: "smooth",
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (location.pathname === "/" && location.hash) {
+      const id = location.hash.replace("#", "");
+      setTimeout(() => {
+        scrollToSection(id);
+      }, 0);
+    }
+  }, [location]);
+
   return (
     <>
       <motion.header
@@ -52,14 +71,9 @@ const Header = () => {
             >
               BLOG
             </Link>
-            <a
-              href="https://wa.me/p/31587987360848672/254727129129"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="header-cta"
-            >
+            <Link to="/#book" className="header-cta">
               GET THE BOOK
-            </a>
+            </Link>
           </nav>
 
           {/* MOBILE TOGGLE */}

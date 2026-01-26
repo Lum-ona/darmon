@@ -81,8 +81,7 @@ export default function Hero() {
                 Knowing God and making Him known.
               </h2>
               <p className="home-hero-description">
-                Through preaching, writing, and music, I inspire
-                transformation...
+                Through preaching, writing, and music, I inspire transformation.
               </p>
             </motion.div>
           </div>

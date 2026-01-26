@@ -12,7 +12,7 @@ import {
   FiGlobe,
 } from "react-icons/fi";
 import "./Contact.css";
-// import emailjs from "@emailjs/browser";
+import emailjs from "@emailjs/browser";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -28,8 +28,34 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // EmailJS Logic remains the same...
-    alert("Transmission Sent to the Archive.");
+
+    try {
+      await emailjs.send(
+        "YOUR_SERVICE_ID",
+        "template_j637jwc",
+        {
+          name: formData.name,
+          email: formData.email,
+          eventType: formData.eventType,
+          eventDate: formData.eventDate || "Not specified",
+          message: formData.message,
+        },
+        "nJ6vkW36e-xWerNSC",
+      );
+
+      alert("Booking request sent successfully!");
+
+      setFormData({
+        name: "",
+        email: "",
+        eventType: "",
+        eventDate: "",
+        message: "",
+      });
+    } catch (error) {
+      console.error(error);
+      alert("Failed to send booking request. Please try again.");
+    }
   };
 
   return (
@@ -108,9 +134,9 @@ const Contact = () => {
                 <div className="meta-row">
                   <FiPhone /> <span>+254 727 129 129</span>
                 </div>
-                <div className="meta-row">
+                {/* <div className="meta-row">
                   <FiMail /> <span>genzlovesjesus@gmail.com</span>
-                </div>
+                </div> */}
                 <div className="meta-row">
                   <FiMapPin /> <span>Nairobi HQ, Kenya</span>
                 </div>

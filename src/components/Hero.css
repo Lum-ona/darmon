@@ -144,7 +144,7 @@
   border-radius: 100px;
   cursor: pointer;
   transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-  font-size: 0.9rem;
+  font-size: 0.75rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.5);
 }
@@ -177,6 +177,10 @@
   .home-hero-bio-box {
     margin: 2rem auto 8rem auto;
   }
+  .global-dock-container {
+    position: absolute;
+    top: 91.5vh;
+  }
 }
 
 @media (max-width: 600px) {
@@ -184,7 +188,7 @@
     font-size: 4rem;
   }
   .home-hero-dock {
-    width: 95%;
+    width: auto;
     bottom: 20px;
     padding: 6px;
   }

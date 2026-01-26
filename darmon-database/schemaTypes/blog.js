@@ -1,20 +1,22 @@
 // schemas/blog.js
-import {defineType, defineField} from 'sanity'
+import {defineField, defineType} from 'sanity'
 
 export const blog = defineType({
   name: 'blog',
   title: 'Blog',
   type: 'document',
+
   fields: [
     defineField({
       name: 'title',
       title: 'Title',
       type: 'string',
-      validation: (Rule) => Rule.required().min(10).max(150),
+      validation: (Rule) => Rule.required(),
     }),
+
     defineField({
       name: 'slug',
-      title: 'Slug',
+      title: 'Slug (URL)',
       type: 'slug',
       options: {
         source: 'title',
@@ -22,43 +24,56 @@ export const blog = defineType({
       },
       validation: (Rule) => Rule.required(),
     }),
+
     defineField({
       name: 'excerpt',
       title: 'Excerpt',
       type: 'text',
-      description: 'Short summary for listing pages',
+      rows: 3,
       validation: (Rule) => Rule.required().max(300),
     }),
+
     defineField({
       name: 'content',
-      title: 'Content',
+      title: 'Blog Content',
       type: 'array',
       of: [
-        {type: 'block'}, // Portable Text blocks for rich content
-        {type: 'image'},
-        {type: 'code'},
+        {
+          type: 'block',
+          styles: [
+            {title: 'Normal', value: 'normal'},
+            {title: 'H1', value: 'h1'},
+            {title: 'H2', value: 'h2'},
+            {title: 'H3', value: 'h3'},
+            {title: 'Quote', value: 'blockquote'},
+          ],
+          lists: [
+            {title: 'Bullet', value: 'bullet'},
+            {title: 'Numbered', value: 'number'},
+          ],
+          marks: {
+            decorators: [
+              {title: 'Bold', value: 'strong'},
+              {title: 'Italic', value: 'em'},
+            ],
+          },
+        },
+        {
+          type: 'image',
+          options: {hotspot: true},
+        },
       ],
       validation: (Rule) => Rule.required(),
     }),
+
     defineField({
       name: 'author',
       title: 'Author',
       type: 'string',
       initialValue: 'Apostle Darmon Shunet',
-      validation: (Rule) => Rule.required(),
+      readOnly: true,
     }),
-    defineField({
-      name: 'date',
-      title: 'Published Date',
-      type: 'datetime',
-      validation: (Rule) => Rule.required(),
-    }),
-    defineField({
-      name: 'readTime',
-      title: 'Read Time',
-      type: 'string',
-      description: 'Estimated reading time, e.g., "8 min read"',
-    }),
+
     defineField({
       name: 'category',
       title: 'Category',
@@ -72,9 +87,11 @@ export const blog = defineType({
           {title: 'Kingdom Living', value: 'Kingdom Living'},
           {title: 'Family', value: 'Family'},
         ],
+        layout: 'radio',
       },
       validation: (Rule) => Rule.required(),
     }),
+
     defineField({
       name: 'tags',
       title: 'Tags',
@@ -84,14 +101,16 @@ export const blog = defineType({
         layout: 'tags',
       },
     }),
+
     defineField({
       name: 'featured',
-      title: 'Featured on Homepage',
+      title: 'Featured Blog',
       type: 'boolean',
       initialValue: false,
     }),
+
     defineField({
-      name: 'image',
+      name: 'mainImage',
       title: 'Featured Image',
       type: 'image',
       options: {
@@ -99,30 +118,40 @@ export const blog = defineType({
       },
       validation: (Rule) => Rule.required(),
     }),
+
     defineField({
-      name: 'views',
-      title: 'Views',
-      type: 'number',
-      initialValue: 0,
+      name: 'readTime',
+      title: 'Estimated Read Time',
+      type: 'string',
+      description: 'Example: 8 min read',
     }),
+
     defineField({
-      name: 'shares',
-      title: 'Shares',
-      type: 'number',
-      initialValue: 0,
+      name: 'publishedAt',
+      title: 'Published Date',
+      type: 'datetime',
+      initialValue: () => new Date().toISOString(),
+      validation: (Rule) => Rule.required(),
     }),
+
+    // --- Stats (optional but future-proof) ---
     defineField({
-      name: 'comments',
-      title: 'Comments Count',
-      type: 'number',
-      initialValue: 0,
+      name: 'stats',
+      title: 'Engagement Stats',
+      type: 'object',
+      fields: [
+        {name: 'views', title: 'Views', type: 'number', initialValue: 0},
+        {name: 'shares', title: 'Shares', type: 'number', initialValue: 0},
+        {name: 'comments', title: 'Comments', type: 'number', initialValue: 0},
+      ],
     }),
   ],
+
   preview: {
     select: {
       title: 'title',
+      media: 'mainImage',
       subtitle: 'category',
-      media: 'image',
     },
   },
 })

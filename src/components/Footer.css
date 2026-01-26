@@ -155,7 +155,6 @@
 /* BOTTOM TECHNICAL BAR */
 .footer-bottom-v3 {
   border-top: 1px solid rgba(255, 255, 255, 0.05);
-  padding-top: 30px;
   display: flex;
   justify-content: space-between;
   align-items: center;

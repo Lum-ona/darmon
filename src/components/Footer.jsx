@@ -1,6 +1,6 @@
 import { motion } from "framer-motion";
-import { FaFacebookF, FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa";
-import { FiArrowUpRight, FiGlobe, FiCpu } from "react-icons/fi";
+import { FaInstagram, FaYoutube, FaTiktok } from "react-icons/fa";
+import { FiGlobe, FiCpu } from "react-icons/fi";
 import "./Footer.css";
 
 const Footer = () => {
@@ -33,13 +33,27 @@ const Footer = () => {
             </p>
             <div className="footer-social-v3">
               {[
-                <FaFacebookF />,
-                <FaInstagram />,
-                <FaYoutube />,
-                <FaTiktok />,
-              ].map((icon, i) => (
-                <a href="#" key={i} className="social-icon-v3">
-                  {icon}
+                {
+                  icon: <FaInstagram />,
+                  url: "https://www.instagram.com/damornshunet/",
+                },
+                {
+                  icon: <FaYoutube />,
+                  url: "https://www.youtube.com/@damornshunet7062",
+                },
+                {
+                  icon: <FaTiktok />,
+                  url: "https://www.tiktok.com/@damornshunet",
+                },
+              ].map((item, i) => (
+                <a
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  key={i}
+                  className="social-icon-v3"
+                >
+                  {item.icon}
                 </a>
               ))}
             </div>
@@ -50,30 +64,29 @@ const Footer = () => {
             <div className="footer-col-v3">
               <h4 className="col-title">TRANSITIONS</h4>
               <a href="#about">The Mandate</a>
-              <a href="#sermons">Media Archive</a>
-              <a href="#blog">Intelligence Log</a>
               <a href="#contact">Global Booking</a>
             </div>
 
             <div className="footer-col-v3">
               <h4 className="col-title">RESOURCES</h4>
-              <a href="#">Ministry Partners</a>
-              <a href="#">Prophetic School</a>
-              <a href="#">Digital Giving</a>
-              <a href="#">Terms of Covenant</a>
+              <a href="#sermons">Media Archive</a>
+              <a href="#blog">Intelligence Log</a>
             </div>
           </div>
 
           {/* NEWSLETTER/CTA COLUMN */}
           <div className="footer-newsletter-v3">
-            <h4 className="col-title">SYSTEM UPDATES</h4>
-            <p>Join the digital remnant for weekly transmissions.</p>
-            <div className="footer-input-box">
+            <h4 className="col-title">JOIN NEWSLETTER</h4>
+            <p>
+              Stay Alert, soon you'll be able to Join the digital remnant for
+              weekly transmissions.
+            </p>
+            {/* <div className="footer-input-box">
               <input type="email" placeholder="ENCRYPTED EMAIL" />
               <button>
                 <FiArrowUpRight />
               </button>
-            </div>
+            </div> */}
           </div>
         </div>
 

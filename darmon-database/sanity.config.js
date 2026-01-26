@@ -5,9 +5,9 @@ import {schemaTypes} from './schemaTypes'
 
 export default defineConfig({
   name: 'default',
-  title: 'testing-darmon-devotionals',
+  title: 'darmon-database',
 
-  projectId: '5ctqhyr7',
+  projectId: '1jnig6bx',
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],

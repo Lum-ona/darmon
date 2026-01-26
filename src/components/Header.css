@@ -67,8 +67,8 @@
   background: transparent;
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: #fff;
-  font-size: 0.7rem;
-  padding: 8px;
+  font-size: 1rem;
+  padding: 6px;
   cursor: pointer;
   z-index: 2100;
   transition: 0.3s;

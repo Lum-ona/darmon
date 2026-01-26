@@ -11,29 +11,51 @@ import Contact from "../components/Contact";
 import Footer from "../components/Footer";
 import Devotionals from "../components/Devotionals";
 import BlogSection from "../components/BlogSection";
+import PartnerModal from "../components/PartnerModal";
 
 export default function Home() {
-  const [activeSection, setActiveSection] = useState("home");
+  const [isPartnerModalOpen, setIsPartnerModalOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("about");
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const navItems = useMemo(
     () => [
-      { name: "Home", id: "home" },
-      { name: "About", id: "about" },
-      { name: "Book", id: "book" },
-      { name: "Devotionals", id: "devotionals" },
-      { name: "Blogs", id: "blog-section" },
-      { name: "Sermons", id: "sermons" },
+      { name: "OVERVIEW", id: "about" },
+      { name: "DEVOTIONALS", id: "devotionals" },
+      { name: "PODCASTS", id: "sermons" },
+      { name: "INVITE ME", id: "contact" },
+      { name: "PARTNER WITH ME", id: "partner" },
     ],
     [],
-  ); // Empty dependency array means this only gets computed once
+  );
+
+  const visibleNavItems = useMemo(() => {
+    if (isMobile) {
+      return navItems.slice(-2); // last two only
+    }
+    return navItems;
+  }, [isMobile, navItems]);
 
   useEffect(() => {
+    if (isMobile) return;
+
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 250;
+
       navItems.forEach((item) => {
         const element = document.getElementById(item.id);
         if (element) {
           const { offsetTop, offsetHeight } = element;
+
           if (
             scrollPosition >= offsetTop &&
             scrollPosition < offsetTop + offsetHeight
@@ -43,11 +65,16 @@ export default function Home() {
         }
       });
     };
+
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, [navItems]); // Now navItems is stable across renders
+  }, [navItems, isMobile]);
 
   const scrollToSection = (id) => {
+    if (id === "partner") {
+      setIsPartnerModalOpen(true);
+      return;
+    }
     const element = document.getElementById(id);
     if (element) {
       window.scrollTo({
@@ -57,10 +84,19 @@ export default function Home() {
     }
   };
 
+  useEffect(() => {
+    if (isMobile && visibleNavItems.length) {
+      setActiveSection(visibleNavItems[visibleNavItems.length - 1].id);
+    }
+  }, [isMobile, visibleNavItems]);
+
   return (
     <div className="App">
       <Header />
-
+      <PartnerModal
+        isOpen={isPartnerModalOpen}
+        onClose={() => setIsPartnerModalOpen(false)}
+      />
       {/* 1. Pass 'home' id to Hero */}
       <div id="home">
         <Hero />
@@ -74,7 +110,7 @@ export default function Home() {
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 1 }}
         >
-          {navItems.map((item) => (
+          {visibleNavItems.map((item) => (
             <div
               key={item.id}
               className={`home-hero-dock-item ${activeSection === item.id ? "active" : ""}`}
