@@ -3,7 +3,7 @@ import "./Ministry.css";
 import regin from "../assets/gallery/IMG_1241.jpg";
 import genz from "../assets/gallery/DSC00424.jpg";
 import author from "../assets/gallery/apostle_official2.jpeg";
-import music from "../assets/gallery/IMG_1108.jpg";
+import music from "../assets/gallery/darmon-suite.jpeg";
 
 const Ministry = () => {
   const ministries = [
@@ -16,12 +16,12 @@ const Ministry = () => {
       link: "https://www.instagram.com/reigncitychapel/",
     },
     {
-      image: genz,
-      title: "Gen Z Loves Jesus",
-      tag: "Youth Movement",
+      image: music,
+      title: "Music Ministry",
+      tag: "Worship Artist",
       description:
-        "A global movement seeing a generation fall in love with Jesus.",
-      link: "https://www.instagram.com/genz_lovesjesus/",
+        "Communicating grace and faith through worship-driven sound.",
+      link: "https://www.youtube.com/watch?v=u17JGgXY194",
     },
     {
       image: author,
@@ -31,12 +31,12 @@ const Ministry = () => {
       link: "https://wa.me/p/31587987360848672/254727129129",
     },
     {
-      image: music,
-      title: "Music Ministry",
-      tag: "Worship Artist",
+      image: genz,
+      title: "Gen Z Loves Jesus",
+      tag: "Youth Movement",
       description:
-        "Communicating grace and faith through worship-driven sound.",
-      link: "https://www.youtube.com/watch?v=u17JGgXY194",
+        "A global movement seeing a generation fall in love with Jesus.",
+      link: "https://www.instagram.com/genz_lovesjesus/",
     },
   ];
 
