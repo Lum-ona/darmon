@@ -93,9 +93,9 @@ const Footer = () => {
         {/* BOTTOM TECHNICAL BAR */}
         <div className="footer-bottom-v3">
           <div className="bottom-meta">
-            <span className="meta-item">
+            {/* <span className="meta-item">
               <FiCpu /> SYNC_STATUS: OPTIMAL
-            </span>
+            </span> */}
             <span className="meta-item">
               <FiGlobe /> REGION: NAIROBI, GLOBAL
             </span>
@@ -105,11 +105,11 @@ const Footer = () => {
             <p>&copy; {currentYear} DAMORN SHUNET MINISTRIES</p>
           </div>
 
-          <div className="bottom-legal">
+          {/* <div className="bottom-legal">
             <a href="#">PRIVACY_VAULT</a>
             <span className="divider">/</span>
             <a href="#">LEGAL_DECREE</a>
-          </div>
+          </div> */}
         </div>
       </div>
     </footer>

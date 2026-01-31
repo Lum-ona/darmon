@@ -4,8 +4,8 @@ import { X, Heart, Globe, Flame, ExternalLink } from "lucide-react";
 import "./PartnerModal.css";
 
 const PartnerModal = ({ isOpen, onClose }) => {
-  const PAYPAL_URL = "";
-  //   const PAYPAL_URL = "https://www.paypal.com/donate?your-id-here";
+  const PAYPAL_URL =
+    "https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=damornkenya77@gmail.com";
 
   return (
     <AnimatePresence>
